@@ -1,12 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'themes/theme-blue.scss';
-html,
-body {
+@font-face {
+    font-family: 'gotham';
+    src: url("./assets/fonts/gotham/GOTHAM-LIGHT.TTF"), url("./assets/fonts/gotham/GOTHAM-BLACK.TTF");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
     height: 100%;
 }
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100%;
+    font-family: 'Droid Sans', sans-serif;
+    font-size: 16px;
+    overflow: auto;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.no-border {
+    border: none;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.margin-right {
+    margin-right: 10px;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    /* added line */
 }
