@@ -27,24 +27,25 @@
 }
 
 .search-form-field {
-    background: var(--color3);
+    background-color: var(--color3);
     border: 0.5px solid var(--color4);
     border-right: 0;
-    @include border-radius-side (4px, 0, 0, 4px);
+    border-radius: 4px 0 0 4px;
     width: 30vw;
 }
 
 .search-btn {
     border: 0.5px solid var(--color4);
-    @include border-radius-side (0, 4px, 4px, 0);
+    border-radius: 0 4px 4px 0;
     color: var(--primary-color);
-    background: var(--later);
+    background-color: var(--later);
 }
 
 ::ng-deep {
     .movie-results.mat-autocomplete-panel {
         border: 0.5px solid var(--color4);
-        @include border-radius-side (0, 0, 10px, 10px);
+        border-top: 0;
+        border-radius: 0 0 10px 10px;
         max-height: 375px;
         .mat-option {
             padding: 0;
@@ -58,10 +59,9 @@
             border-bottom: 0.5px solid var(--color4);
             color: var(--color4);
             @include hover-focus {
-                background: var(--later);
+                background-color: var(--later);
                 color: var(--primary-color);
                 .no-image {
-                    color: var(--primary-color);
                     border-color: var(--primary-color);
                 }
             }
@@ -77,12 +77,10 @@
         }
         .no-image {
             border: 1.5px dashed var(--color4);
-            @include border-radius(5px);
-            font-size: 6px;
-            font-weight: bolder;
+            border-radius: 5px;
+            @include font-setting(6px, false, bolder);
             text-align: center;
-            height: 100%;
-            width: 100%;
+            @include square(100%);
             margin-right: 15px;
             padding: 7px 0px;
             white-space: normal;
@@ -90,13 +88,10 @@
         .movie-title {
             display: block;
             margin-bottom: 5px;
-            font-size: 0.875em;
-            font-weight: bold;
-            color: var(--primary-color);
+            @include font-setting(0.875em, var(--primary-color), bold);
         }
         .movie-genre {
-            font-style: italic;
-            font-size: 0.813em;
+            @include font-setting(0.813em, false, false, italic);
         }
         .more-results-btn {
             width: 100%;
@@ -104,12 +99,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 15px;
-            background: var(--color2);
-            color: var(--color4);
-            font-size: 0.875em;
+            background-color: var(--color2);
+            @include font-setting(0.875em, var(--color4));
             text-decoration: none;
             @include hover-focus {
-                background: var(--later);
+                background-color: var(--later);
                 color: var(--primary-color);
             }
             .mat-icon {

@@ -1,6 +1,6 @@
 @import '../../../common_styles/mixins.scss';
 header {
-    background: var(--color2);
+    background-color: var(--color2);
 }
 
 ul {
@@ -17,19 +17,18 @@ li {
 .nav-link {
     display: flex;
     align-items: center;
-    font-size: 1.125em;
+    @include font-setting(1.125em, var(--primary-color));
     text-decoration: none;
-    color: var(--primary-color);
     padding: 10px 15px;
     height: 100%;
     &.active {
-        background: var(--color3);
+        background-color: var(--color3);
         font-weight: bold;
         border-bottom: 6px solid var(--later);
         padding-bottom: 4px;
     }
     @include hover-focus {
-        background: var(--color3);
+        background-color: var(--color3);
     }
     mat-icon {
         margin-right: 5px;
@@ -41,15 +40,13 @@ li {
     align-items: center;
     height: 100%;
     background: transparent;
-    font-size: 1em;
-    color: var(--primary-color);
+    @include font-setting(1em, var(--primary-color));
 }
 
 .img-cont {
     display: flex;
-    @include border-radius(50%);
-    width: 40px;
-    height: 40px;
+    border-radius: 50%;
+    @include square(40px);
     overflow: hidden;
     margin-right: 10px;
     img {
@@ -62,8 +59,7 @@ li {
     .nav-options {
         background: var(--color2);
         .mat-menu-item {
-            color: var(--primary-color);
-            font-size: 0.875em;
+            @include font-setting(0.875em, var(--primary-color));
             &.cdk-keyboard-focused:not([disabled]),
             &.cdk-program-focused:not([disabled]),
             &:hover:not([disabled]) {
