@@ -1,3 +1,4 @@
+@import '../../../common_styles/mixins.scss';
 header {
     background: var(--color2);
 }
@@ -27,8 +28,7 @@ li {
         border-bottom: 6px solid var(--later);
         padding-bottom: 4px;
     }
-    &:hover,
-    &:focus {
+    @include hover-focus {
         background: var(--color3);
     }
     mat-icon {
@@ -41,15 +41,13 @@ li {
     align-items: center;
     height: 100%;
     background: transparent;
-    border: none;
     font-size: 1em;
     color: var(--primary-color);
-    float: right;
 }
 
 .img-cont {
     display: flex;
-    border-radius: 50%;
+    @include border-radius(50%);
     width: 40px;
     height: 40px;
     overflow: hidden;

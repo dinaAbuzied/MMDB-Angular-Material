@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'themes/theme-blue.scss';
+// @import 'themes/theme-blue.scss';
+@import 'common_styles/mixins.scss';
 @font-face {
     font-family: 'gotham';
     src: url("./assets/font/gotham/GOTHAM-LIGHT.TTF"), url("./assets/font/gotham/GOTHAM-BLACK.TTF");
@@ -55,24 +56,24 @@ input[type=submit] {
     }
 }
 
-.no-margin {
+@include attr-class ('no-border') {
+    border: none !important;
+}
+
+@include attr-class ('no-margin') {
     margin: 0 !important;
 }
 
-.no-padding {
+@include attr-class ('no-padding') {
     padding: 0 !important;
 }
 
-.pull-left {
+@include attr-class ('pull-left') {
     float: left;
 }
 
-.pull-right {
+@include attr-class ('pull-right') {
     float: right;
-}
-
-.no-border {
-    border: none;
 }
 
 .visually-hidden {
