@@ -1,0 +1,79 @@
+header {
+    background: var(--color2);
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    list-style: none;
+    &.last-item {
+        flex: 1;
+    }
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 1.125em;
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 10px 15px;
+    height: 100%;
+    &.active {
+        background: var(--color3);
+        font-weight: bold;
+        border-bottom: 6px solid var(--later);
+        padding-bottom: 4px;
+    }
+    &:hover,
+    &:focus {
+        background: var(--color3);
+    }
+    mat-icon {
+        margin-right: 5px;
+    }
+}
+
+.mat-menu-trigger {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+    font-size: 1em;
+    color: var(--primary-color);
+    float: right;
+}
+
+.img-cont {
+    display: flex;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    margin-right: 10px;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+::ng-deep {
+    .nav-options {
+        background: var(--color2);
+        .mat-menu-item {
+            color: var(--primary-color);
+            font-size: 0.875em;
+            &.cdk-keyboard-focused:not([disabled]),
+            &.cdk-program-focused:not([disabled]),
+            &:hover:not([disabled]) {
+                background: var(--color3);
+            }
+        }
+        .mat-icon {
+            color: var(--primary-color);
+        }
+    }
+}

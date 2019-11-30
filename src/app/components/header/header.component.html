@@ -1,0 +1,61 @@
+<header>
+    <nav>
+        <ul class="no-margin no-padding">
+            <li>
+                <a class="active nav-link" href="/home">
+                    <mat-icon>home</mat-icon>
+                    Home
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+            <li>
+                <app-header-search-bar></app-header-search-bar>
+            </li>
+            <li>
+                <a class="nav-link" href="/home">
+                    <mat-icon>local_movies</mat-icon>
+                    My Movies
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/home">
+                    <mat-icon>pie_chart</mat-icon>
+                    Statistics
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/home">
+                    <mat-icon>list</mat-icon>
+                    Lists
+                    <span class="visually-hidden">(current)</span>
+                </a>
+            </li>
+            <li class="last-item">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="more options">
+                        <div class="img-cont">
+                                <img src="../../../assets/img/profile.jpg" alt="user profile">
+                        </div>
+                        Dina
+                            <mat-icon>arrow_drop_down</mat-icon>
+                          </button>
+                <mat-menu class="nav-options" #menu="matMenu">
+                    <a href="/home" mat-menu-item>
+                        <mat-icon>person</mat-icon>
+                        <span>View Profile</span>
+                    </a>
+                    <a href="/home" mat-menu-item>
+                        <mat-icon>settings_applications</mat-icon>
+                        <span>Account Settings</span>
+                    </a>
+                    <mat-divider></mat-divider>
+                    <a href="/home" mat-menu-item>
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Sign Out</span>
+                    </a>
+                </mat-menu>
+            </li>
+        </ul>
+    </nav>
+</header>
