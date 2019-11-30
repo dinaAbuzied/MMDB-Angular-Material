@@ -3,7 +3,23 @@
 @import 'themes/theme-blue.scss';
 @font-face {
     font-family: 'gotham';
-    src: url("./assets/fonts/gotham/GOTHAM-LIGHT.TTF"), url("./assets/fonts/gotham/GOTHAM-BLACK.TTF");
+    src: url("./assets/font/gotham/GOTHAM-LIGHT.TTF"), url("./assets/font/gotham/GOTHAM-BLACK.TTF");
+}
+
+:root {
+    --primary-color: #fff;
+    --color1: #20243f;
+    --color2: #394263;
+    --color3: #50597a;
+    --color4: #8992b3;
+    --later: #10A8AB;
+    --later-darker: #028285;
+    --fav: #E64C66;
+    --fav-darker: #c9334e;
+    --wish: #F7B054;
+    --wish-darker: #C68D43;
+    --own: #51C3F9;
+    --own-darker: #279ed3;
 }
 
 * {
@@ -20,6 +36,15 @@ body {
     font-family: 'Droid Sans', sans-serif;
     font-size: 16px;
     overflow: auto;
+    background: var(--color1);
+}
+
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+    -webkit-appearance: button;
+    cursor: pointer;
 }
 
 .no-margin {
