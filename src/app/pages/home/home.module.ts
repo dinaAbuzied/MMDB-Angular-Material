@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 import { ComponentsModule } from '../../components/components.module';
+import { MovieListComponent } from './movie-list/movie-list.component';
+import { SideListComponent } from './side-list/side-list.component';
 
 
 const routes: Routes = [{
@@ -12,12 +17,14 @@ const routes: Routes = [{
 }];
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, MovieListComponent, SideListComponent],
   exports: [RouterModule],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class HomeModule { }

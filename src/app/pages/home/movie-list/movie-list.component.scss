@@ -1,0 +1,130 @@
+@import '../../../../common_styles/mixins.scss';
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+    background-color: var(--color3);
+    color: var(--primary-color);
+    &>div {
+        display: flex;
+        align-items: center;
+    }
+    label {
+        font-size: 1.125em;
+        margin-left: 5px;
+    }
+    .mat-button {
+        @include font-setting(0.875em, false, bold, false, false, 24px);
+        border: 0.5px solid var(--color4);
+        border-radius: 5px;
+        padding: 5px 5px 5px 15px;
+        .mat-icon {
+            transition: .3s ease;
+        }
+        &.expanded .mat-icon {
+            @include rotate(90deg);
+        }
+    }
+}
+
+main {
+    background-color: var(--color2);
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.movie-card {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    flex-basis: 20%;
+    padding: 0 10px;
+    margin: 0 0 10px;
+    &:focus-within .overlay {
+        bottom: 0;
+    }
+    @include hover-focus {
+        .overlay {
+            bottom: 0;
+        }
+    }
+}
+
+.poster-container {
+    position: relative;
+    width: 100%;
+    background-color: var(--color2);
+    overflow-y: hidden;
+    padding: 0 0 150%;
+}
+
+.movie-poster {
+    max-width: 100%;
+    @include abs-position(false, false, false, 0);
+}
+
+.no-image {
+    position: absolute;
+    @include square(100%);
+    border: 2px dashed var(--color4);
+    border-radius: 5px;
+    padding: 40% 0px;
+    @include font-setting(2em, var(--color4), bolder, false, center);
+}
+
+.overlay {
+    display: flex;
+    @include abs-position(false, false, -44px, 0);
+    padding: 0 10px;
+    width: 100%;
+    transition: .3s ease;
+}
+
+.user-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    border-width: 0 0.5px 0 0.5px;
+    border-color: var(--color2);
+    background-color: var(--color3);
+    @include font-setting(1.375em, #000, bold, false, center);
+    padding: 12px 0 8px;
+    .top-border {
+        width: calc(100% - 1px);
+        height: 6px;
+        @include abs-position(0, .5px);
+    }
+    .mat-icon {
+        text-shadow: 0px 1px 0px #ffffff;
+        opacity: 0.2;
+    }
+    $icons: (fav, later, wish, own);
+    @each $icon in $icons {
+        &.#{$icon} {
+            @include hover-focus {
+                .mat-icon {
+                    text-shadow: none;
+                    opacity: 1;
+                    color: var(--#{$icon});
+                }
+            }
+            .top-border {
+                background-color: var(--#{$icon});
+            }
+            &.active {
+                background-color: var(--#{$icon});
+                .top-border {
+                    background-color: var(--#{$icon}-darker);
+                }
+                @include hover-focus {
+                    .mat-icon {
+                        color: var(--#{$icon}-darker);
+                    }
+                }
+            }
+        }
+    }
+}

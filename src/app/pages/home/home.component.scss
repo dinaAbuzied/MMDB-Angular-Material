@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+}
+
+.movie-lists {
+    flex: 9;
+    width: 75%;
+    padding-right: 7px;
+}
+
+.side-lists {
+    flex: 3;
+    width: 25%;
+    padding-left: 8px;
+}

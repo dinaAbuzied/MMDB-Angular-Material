@@ -1,0 +1,37 @@
+<header>
+    <div>
+        <mat-icon>movie</mat-icon>
+        <label>Now Playing</label>
+    </div>
+    <button mat-button (click)="toggleExpandedList()" [ngClass]="{'expanded': listExpanded}">
+        more
+        <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+</header>
+<!-- TO DO: add angular animation to expand this panel -->
+<main>
+    <div class="movie-card" *ngFor="let movie of currentMovieList">
+        <button class="poster-container no-border">
+                <div class="no-image" *ngIf="!movie.poster">No Image Available</div>
+                <img class="movie-poster" *ngIf="movie.poster" src="{{movie.poster}}" alt="{{movie.title}}">
+        </button>
+        <div class="overlay">
+            <button aria-label="add to favorites" title="Favorites" class="user-list fav" [ngClass]="{'active': movie.fav}">
+                <span class="top-border"></span>
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button aria-label="add to watch later" title="Watch Later" class="user-list later" [ngClass]="{'active': movie.later}">
+                    <span class="top-border"></span>
+                    <mat-icon>remove_red_eye</mat-icon>
+            </button>
+            <button aria-label="add to wish list" title="Wish List" class="user-list wish" [ngClass]="{'active': movie.list}">
+                    <span class="top-border"></span>
+                    <mat-icon>card_giftcard</mat-icon>
+            </button>
+            <button aria-label="add to own it" title="Own it" class="user-list own" [ngClass]="{'active': movie.own}">
+                    <span class="top-border"></span>
+                    <mat-icon>inbox</mat-icon>
+            </button>
+        </div>
+    </div>
+</main>
