@@ -1,0 +1,10 @@
+<div class="movie-details">
+    <div class="poster-container">
+        <div class="no-image" *ngIf="!movie.poster">No Image Available</div>
+        <img class="movie-poster" *ngIf="movie.poster" src="{{movie.poster}}" alt="{{movie.title}}">
+    </div>
+    <div class="details-container">
+        <span class="movie-title">{{movie.title}} ({{movie.year}})</span>
+        <span class="movie-genre" *ngFor="let genre of movie.genres; let i = index;">{{genre}}{{i < movie.genres.length - 1 ? ',' : '.'}} </span>
+    </div>
+</div>

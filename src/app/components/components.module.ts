@@ -9,17 +9,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { HeaderSearchBarComponent } from './header-search-bar/header-search-bar.component';
+import { MovieRowComponent } from './movie-row/movie-row.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    HeaderSearchBarComponent
+    HeaderSearchBarComponent,
+    MovieRowComponent
   ],
   exports: [
     HeaderComponent,
-    HeaderSearchBarComponent
+    HeaderSearchBarComponent,
+    MovieRowComponent
   ],
   imports: [
     CommonModule,

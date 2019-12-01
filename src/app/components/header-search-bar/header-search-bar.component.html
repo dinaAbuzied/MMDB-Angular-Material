@@ -3,19 +3,10 @@
         <input type="text" placeholder="Search" aria-label="Search" matInput [formControl]="searchControl" [matAutocomplete]="auto">
         <mat-autocomplete class="movie-results" #auto="matAutocomplete">
             <mat-option *ngFor="let movie of searchResults" [value]="option">
-                <div class="movie-details">
-                    <div class="poster-container">
-                        <div class="no-image" *ngIf="!movie.poster">No Image Available</div>
-                        <img class="movie-poster" *ngIf="movie.poster" src="{{movie.poster}}">
-                    </div>
-                    <div class="details-container">
-                        <span class="movie-title">{{movie.title}} ({{movie.year}})</span>
-                        <span class="movie-genre" *ngFor="let genre of movie.genres; let i = index;">{{genre}}{{i < movie.genres.length - 1 ? ',' : '.'}} </span>
-                    </div>
-                </div>
+                <app-movie-row [movie]="movie"></app-movie-row>
             </mat-option>
             <mat-option>
-                <a href="/home" class="more-results-btn">
+                <a mat-button href="/home" class="more-results-btn">
                     see more results for "mission:"
                     <mat-icon>double_arrow</mat-icon>
                 </a>

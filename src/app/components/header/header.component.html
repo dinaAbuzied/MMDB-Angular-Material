@@ -2,7 +2,7 @@
     <nav>
         <ul class="no-margin no-padding">
             <li>
-                <a class="active nav-link" href="/home">
+                <a mat-button class="active nav-link" href="/home">
                     <mat-icon>home</mat-icon>
                     Home
                     <span class="visually-hidden">(current)</span>
@@ -12,28 +12,28 @@
                 <app-header-search-bar></app-header-search-bar>
             </li>
             <li>
-                <a class="nav-link" href="/home">
+                <a mat-button class="nav-link" href="/home">
                     <mat-icon>local_movies</mat-icon>
                     My Movies
                     <span class="visually-hidden">(current)</span>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/home">
+                <a mat-button class="nav-link" href="/home">
                     <mat-icon>pie_chart</mat-icon>
                     Statistics
                     <span class="visually-hidden">(current)</span>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/home">
+                <a mat-button class="nav-link" href="/home">
                     <mat-icon>list</mat-icon>
                     Lists
                     <span class="visually-hidden">(current)</span>
                 </a>
             </li>
             <li class="last-item">
-                <button no-border pull-right mat-icon-button [matMenuTriggerFor]="menu" aria-label="more options">
+                <button no-border pull-right mat-button [matMenuTriggerFor]="menu" aria-label="more options">
                         <div class="img-cont">
                                 <img src="../../../assets/img/profile.jpg" alt="user profile">
                         </div>

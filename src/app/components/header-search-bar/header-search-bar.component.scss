@@ -43,6 +43,8 @@
 
 ::ng-deep {
     .movie-results.mat-autocomplete-panel {
+        --details-background-hover: var(--later);
+        --details-color-hover: var(--primary-color);
         border: 0.5px solid var(--color4);
         border-top: 0;
         border-radius: 0 0 10px 10px;
@@ -52,46 +54,9 @@
             height: auto;
             line-height: initial;
         }
-        .movie-details {
-            display: flex;
-            padding: 5px 15px;
-            background-color: var(--color3);
-            border-bottom: 0.5px solid var(--color4);
-            color: var(--color4);
-            @include hover-focus {
-                background-color: var(--later);
-                color: var(--primary-color);
-                .no-image {
-                    border-color: var(--primary-color);
-                }
-            }
-        }
-        .poster-container {
-            width: 32px;
-            height: 48px;
-            margin-right: 15px;
-        }
-        .movie-poster {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .no-image {
-            border: 1.5px dashed var(--color4);
-            border-radius: 5px;
-            @include font-setting(6px, false, bolder);
-            text-align: center;
-            @include square(100%);
-            margin-right: 15px;
-            padding: 7px 0px;
-            white-space: normal;
-        }
-        .movie-title {
+        app-movie-row {
             display: block;
-            margin-bottom: 5px;
-            @include font-setting(0.875em, var(--primary-color), bold);
-        }
-        .movie-genre {
-            @include font-setting(0.813em, false, false, italic);
+            border: 0.5px solid var(--color4);
         }
         .more-results-btn {
             width: 100%;
