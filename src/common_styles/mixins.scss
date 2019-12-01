@@ -74,7 +74,7 @@
     }
 }
 
-@mixin font-setting($size: false, $colour: false, $weight: false, $style: false, $lh: false) {
+@mixin font-setting($size: false, $colour: false, $weight: false, $style: false, $align: false, $lh: false) {
     @if $size {
         font-size: $size;
     }
@@ -86,6 +86,9 @@
     }
     @if $style {
         font-style: $style;
+    }
+    @if $align {
+        text-align: $align;
     }
     @if $lh {
         line-height: $lh;

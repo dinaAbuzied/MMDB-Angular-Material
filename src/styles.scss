@@ -48,6 +48,10 @@ input[type=submit] {
     cursor: pointer;
 }
 
+.container {
+    padding: 15px;
+}
+
 .mat-input-element {
     caret-color: var(--primary-color);
     &:focus {
