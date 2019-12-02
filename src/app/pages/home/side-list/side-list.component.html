@@ -9,5 +9,8 @@
         </a>
 </header>
 <main>
-
+    <div class="movie-details-cont" *ngFor="let movie of movieList">
+        <app-movie-row [movie]="movie"></app-movie-row>
+    </div>
+    <p no-margin *ngIf="movieList.length == 0">Add Movies to see here!</p>
 </main>

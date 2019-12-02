@@ -1,0 +1,52 @@
+@import '../../../../common_styles/mixins.scss';
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+    background-color: var(--later);
+    color: var(--primary-color);
+    &>div {
+        display: flex;
+        align-items: center;
+    }
+    label {
+        font-size: 1.125em;
+        margin-left: 5px;
+    }
+    .mat-button {
+        @include font-setting(0.875em, false, bold, false, false, 24px);
+        border: 0.5px solid var(--primary-color);
+        border-radius: 5px;
+        padding: 5px 5px 5px 15px;
+        .mat-icon {
+            transition: .3s ease;
+        }
+    }
+}
+
+main {
+    position: relative;
+    background-color: var(--color2);
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    >p {
+        @include font-setting(2em, #000000, false, false, center);
+        width: 100%;
+        text-shadow: 0px 1px 0px #ffffff;
+        opacity: 0.2;
+        padding: 40px;
+        cursor: default;
+    }
+}
+
+.movie-details-cont {
+    --details-padding-right: 5px;
+    --details-padding-left: 5px;
+    --poster-margin-right: 5px;
+    --movie-title-weight: normal;
+    margin: 5px 0;
+    &:nth-child(2n+1) {
+        --details-background: var(--color4);
+        --details-color: var(--primary-color-opacity)
+    }
+}
