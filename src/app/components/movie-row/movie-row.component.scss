@@ -5,13 +5,16 @@ $Details-padding-bottom: var(--details-padding-bottom, 5px);
 $Details-padding-left: var(--details-padding-left, 15px);
 $Details-background: var(--details-background, var(--color3));
 $Details-color: var(--details-color, var(--color4));
-$Details-background-hover: var(--details-background-hover, var(--color3));
-$Details-color-hover: var(--details-color-hover, var(--color4));
+$Details-background-hover: var(--details-background-hover, $Details-background);
+$Details-color-hover: var(--details-color-hover, $Details-color);
+$Poster-margin-right: var(--poster-margin-right, 15px);
+$Movie-title-weight: var(--movie-title-weight, bold);
 .movie-details {
     display: flex;
+    width: 100%;
+    @include font-setting(1em, $Details-color, false, false, left);
     padding: $Details-padding-top $Details-padding-right $Details-padding-bottom $Details-padding-left;
     background-color: $Details-background;
-    color: $Details-color;
     @include hover-focus {
         background-color: $Details-background-hover;
         color: $Details-color-hover;
@@ -24,7 +27,7 @@ $Details-color-hover: var(--details-color-hover, var(--color4));
 .poster-container {
     width: 32px;
     height: 48px;
-    margin-right: 15px;
+    margin-right: $Poster-margin-right;
 }
 
 .movie-poster {
@@ -33,19 +36,23 @@ $Details-color-hover: var(--details-color-hover, var(--color4));
 }
 
 .no-image {
-    border: 1.5px dashed var(--color4);
+    border: 1.5px dashed $Details-color;
     border-radius: 5px;
-    @include font-setting(6px, false, bolder, false, center);
+    @include font-setting(5px, false, bolder, false, center);
     @include square(100%);
-    margin-right: 15px;
     padding: 7px 0px;
     white-space: normal;
+}
+
+.details-container {
+    width: calc(100% - (32px + var(--poster-margin-right, 15px)));
 }
 
 .movie-title {
     display: block;
     margin-bottom: 5px;
-    @include font-setting(0.875em, var(--primary-color), bold);
+    @include font-setting(0.875em, var(--primary-color), $Movie-title-weight);
+    @include truncate(100%);
 }
 
 .movie-genre {
