@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { HeaderSearchBarComponent } from './header-search-bar/header-search-bar.component';
 import { MovieRowComponent } from './movie-row/movie-row.component';
 import { MoviePosterComponent } from './movie-poster/movie-poster.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 
 
@@ -19,7 +20,8 @@ import { MoviePosterComponent } from './movie-poster/movie-poster.component';
     HeaderComponent,
     HeaderSearchBarComponent,
     MovieRowComponent,
-    MoviePosterComponent
+    MoviePosterComponent,
+    MovieDetailsComponent
   ],
   exports: [
     HeaderComponent,
@@ -37,6 +39,7 @@ import { MoviePosterComponent } from './movie-poster/movie-poster.component';
     MatInputModule,
     MatMenuModule,
     MatDividerModule
-  ]
+  ],
+  entryComponents: [MovieDetailsComponent]
 })
 export class ComponentsModule { }
