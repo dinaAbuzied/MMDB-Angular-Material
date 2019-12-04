@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-side-list',
@@ -6,8 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./side-list.component.scss']
 })
 export class SideListComponent implements OnInit {
+  @Output() selectMovie: EventEmitter<number> = new EventEmitter();
 
   @Input() movieList: Array<{
+    id: number,
     title: string,
     year: number,
     poster?: string,
@@ -19,6 +21,10 @@ export class SideListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSelectMovie(id: number) {
+    this.selectMovie.emit(id);
   }
 
 }

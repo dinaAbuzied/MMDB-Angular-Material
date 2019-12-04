@@ -1,11 +1,13 @@
-<app-header [active]="'home'"></app-header>
+<app-header [active]="'home'">
+    <app-header-search-bar (selectMovie)="showMovieDetails($event)"></app-header-search-bar>
+</app-header>
 <main class="container">
     <section class="movie-lists">
-        <app-movie-list [movieList]="nowPlaying" [title]="'Now Playing'"></app-movie-list>
-        <app-movie-list [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
+        <app-movie-list (selectMovie)="showMovieDetails($event)" [movieList]="nowPlaying" [title]="'Now Playing'"></app-movie-list>
+        <app-movie-list (selectMovie)="showMovieDetails($event)" [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
     </section>
     <section class="side-lists">
-        <app-side-list [movieList]="watchLaterData" [header]="watchLaterHeader"></app-side-list>
-        <app-side-list [movieList]="wishListData" [header]="wishListHeader"></app-side-list>
+        <app-side-list (selectMovie)="showMovieDetails($event)" [movieList]="watchLaterData" [header]="watchLaterHeader"></app-side-list>
+        <app-side-list (selectMovie)="showMovieDetails($event)" [movieList]="wishListData" [header]="wishListHeader"></app-side-list>
     </section>
 </main>

@@ -9,7 +9,8 @@
                 </a>
             </li>
             <li>
-                <app-header-search-bar></app-header-search-bar>
+                <!-- <app-header-search-bar></app-header-search-bar> -->
+                <ng-content></ng-content>
             </li>
             <li>
                 <a mat-button [ngClass]="{'active': active =='my_movies'}" class="nav-link" href="/my_movies">

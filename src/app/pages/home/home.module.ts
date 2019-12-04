@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ComponentsModule } from '../../components/components.module';
 import { MovieListComponent } from './movie-list/movie-list.component';
@@ -24,7 +25,8 @@ const routes: Routes = [{
     CommonModule,
     ComponentsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

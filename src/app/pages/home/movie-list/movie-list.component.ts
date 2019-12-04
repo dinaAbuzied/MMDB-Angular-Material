@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-movie-list',
@@ -6,7 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
+  @Output() selectMovie: EventEmitter<number> = new EventEmitter();
+
   @Input() movieList: Array<{
+    id: number,
     title: string,
     poster?: string,
     fav?: boolean,
@@ -18,6 +21,7 @@ export class MovieListComponent implements OnInit {
   @Input() title: string;
 
   currentMovieList: Array<{
+    id: number,
     title: string,
     poster?: string,
     fav?: boolean,
@@ -42,6 +46,10 @@ export class MovieListComponent implements OnInit {
 
   toggleUserList(list: string, movie) {
     movie[list] = !movie[list];
+  }
+
+  onSelectMovie(id: number) {
+    this.selectMovie.emit(id);
   }
 
 }

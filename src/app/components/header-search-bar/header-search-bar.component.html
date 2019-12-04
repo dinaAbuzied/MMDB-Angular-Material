@@ -1,11 +1,11 @@
 <form class="search-form">
     <mat-form-field class="search-form-field" [floatLabel]="'never'">
-        <input type="text" placeholder="Search" aria-label="Search" matInput [formControl]="searchControl" [matAutocomplete]="auto">
-        <mat-autocomplete class="movie-results" #auto="matAutocomplete">
-            <mat-option *ngFor="let movie of searchResults" [value]="option">
+        <input [(ngModel)]="searchPhrase" type="text" placeholder="Search" aria-label="Search" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-autocomplete class="movie-results" #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+            <mat-option [value]="movie.id" *ngFor="let movie of searchResults" [value]="option">
                 <app-movie-row [movie]="movie"></app-movie-row>
             </mat-option>
-            <mat-option (click)="onClick()">
+            <mat-option [value]="'see more'">
                 <a mat-button href="/home" class="more-results-btn">
                 see more results for "mission:"
                 <mat-icon>double_arrow</mat-icon>
@@ -15,5 +15,5 @@
     </mat-form-field>
     <button class="search-btn pull-right" mat-icon-button aria-label="Search">
             <mat-icon>search</mat-icon>
-          </button>
+    </button>
 </form>
