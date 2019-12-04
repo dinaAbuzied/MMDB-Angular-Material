@@ -5,7 +5,7 @@
         <app-movie-list [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
     </section>
     <section class="side-lists">
-        <app-side-list></app-side-list>
-        <app-side-list></app-side-list>
+        <app-side-list [movieList]="watchLaterData" [header]="watchLaterHeader"></app-side-list>
+        <app-side-list [movieList]="wishListData" [header]="wishListHeader"></app-side-list>
     </section>
 </main>

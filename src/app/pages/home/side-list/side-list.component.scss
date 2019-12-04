@@ -3,8 +3,13 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 13px;
-    background-color: var(--later);
     color: var(--primary-color);
+    &.later {
+        background-color: var(--later);
+    }
+    &.list {
+        background-color: var(--wish);
+    }
     &>div {
         display: flex;
         align-items: center;
