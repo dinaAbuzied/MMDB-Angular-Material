@@ -1,7 +1,7 @@
 <header>
     <div>
         <mat-icon>movie</mat-icon>
-        <label>Now Playing</label>
+        <label>{{title}}</label>
     </div>
     <button mat-button (click)="toggleExpandedList()" [ngClass]="{'expanded': listExpanded}">
         more

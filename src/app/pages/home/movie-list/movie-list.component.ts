@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-movie-list',
@@ -6,50 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
-  movieList: Array<{
+  @Input() movieList: Array<{
     title: string,
     poster?: string,
     fav?: boolean,
     later?: boolean,
     list?: boolean,
     own?: boolean
-  }> = [{
-    title: 'Knives Out',
-    poster: 'https://image.tmdb.org/t/p/w342/pThyQovXQrw2m0s9x82twj48Jq4.jpg',
-    later: true
-  }, {
-    title: 'Stay Out Stay Alive'
-  }, {
-    title: 'Never Surrender: A Galaxy Quest Documentary',
-    poster: 'https://image.tmdb.org/t/p/w342/40Tje7U3S6LwNL2KRothPEmgw7H.jpg',
-    fav: true
-  }, {
-    title: 'The Courier',
-    poster: 'https://image.tmdb.org/t/p/w342/ApZ6eymKwLJJnwxb9JskYRdjq7j.jpg',
-    list: true,
-  }, {
-    title: 'A Beautiful Day in the Neighborhood',
-    poster: 'https://image.tmdb.org/t/p/w342/hoydgw429fYlYIGrPIjAdpftL8z.jpg',
-    own: true
-  }, {
-    title: 'Knives Out',
-    poster: 'https://image.tmdb.org/t/p/w342/pThyQovXQrw2m0s9x82twj48Jq4.jpg',
-    later: true
-  }, {
-    title: 'Stay Out Stay Alive'
-  }, {
-    title: 'Never Surrender: A Galaxy Quest Documentary',
-    poster: 'https://image.tmdb.org/t/p/w342/40Tje7U3S6LwNL2KRothPEmgw7H.jpg',
-    fav: true
-  }, {
-    title: 'The Courier',
-    poster: 'https://image.tmdb.org/t/p/w342/ApZ6eymKwLJJnwxb9JskYRdjq7j.jpg',
-    list: true,
-  }, {
-    title: 'A Beautiful Day in the Neighborhood',
-    poster: 'https://image.tmdb.org/t/p/w342/hoydgw429fYlYIGrPIjAdpftL8z.jpg',
-    own: true
-  }];
+  }> = [];
+
+  @Input() title: string;
 
   currentMovieList: Array<{
     title: string,
