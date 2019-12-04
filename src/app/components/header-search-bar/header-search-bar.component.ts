@@ -45,4 +45,7 @@ export class HeaderSearchBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick() {
+    console.log('clicked');
+  }
 }

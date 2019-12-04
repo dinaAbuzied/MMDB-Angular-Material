@@ -5,10 +5,10 @@
             <mat-option *ngFor="let movie of searchResults" [value]="option">
                 <app-movie-row [movie]="movie"></app-movie-row>
             </mat-option>
-            <mat-option>
+            <mat-option (click)="onClick()">
                 <a mat-button href="/home" class="more-results-btn">
-                    see more results for "mission:"
-                    <mat-icon>double_arrow</mat-icon>
+                see more results for "mission:"
+                <mat-icon>double_arrow</mat-icon>
                 </a>
             </mat-option>
         </mat-autocomplete>

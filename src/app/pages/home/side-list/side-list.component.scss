@@ -45,6 +45,8 @@ main {
     --poster-margin-right: 5px;
     --movie-title-weight: normal;
     margin: 5px 0;
+    width: 100%;
+    font-size: 1em;
     &:nth-child(2n+1) {
         --details-background: var(--color4);
         --details-color: var(--primary-color-opacity)

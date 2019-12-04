@@ -5,8 +5,6 @@ $Details-padding-bottom: var(--details-padding-bottom, 5px);
 $Details-padding-left: var(--details-padding-left, 15px);
 $Details-background: var(--details-background, var(--color3));
 $Details-color: var(--details-color, var(--color4));
-$Details-background-hover: var(--details-background-hover, $Details-background);
-$Details-color-hover: var(--details-color-hover, $Details-color);
 $Poster-margin-right: var(--poster-margin-right, 15px);
 $Movie-title-weight: var(--movie-title-weight, bold);
 .movie-details {
@@ -15,13 +13,6 @@ $Movie-title-weight: var(--movie-title-weight, bold);
     @include font-setting(1em, $Details-color, false, false, left);
     padding: $Details-padding-top $Details-padding-right $Details-padding-bottom $Details-padding-left;
     background-color: $Details-background;
-    @include hover-focus {
-        background-color: $Details-background-hover;
-        color: $Details-color-hover;
-        .no-image {
-            border-color: $Details-color-hover;
-        }
-    }
 }
 
 .poster-container {
