@@ -40,7 +40,7 @@ main {
     flex: 1;
     flex-basis: 20%;
     padding: 0 10px;
-    margin: 0 0 10px;
+    margin: 10px 0;
     &:focus-within .overlay {
         bottom: 0;
     }
@@ -52,25 +52,9 @@ main {
 }
 
 .poster-container {
-    position: relative;
     width: 100%;
-    background-color: var(--color2);
-    overflow-y: hidden;
-    padding: 0 0 150%;
-}
-
-.movie-poster {
-    max-width: 100%;
-    @include abs-position(false, false, false, 0);
-}
-
-.no-image {
-    position: absolute;
-    @include square(100%);
-    border: 2px dashed var(--color4);
-    border-radius: 5px;
-    padding: 40% 0px;
-    @include font-setting(2em, var(--color4), bolder, false, center);
+    background-color: transparent;
+    color: var(--color4);
 }
 
 .overlay {

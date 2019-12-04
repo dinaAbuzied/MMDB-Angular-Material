@@ -10,6 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { HeaderSearchBarComponent } from './header-search-bar/header-search-bar.component';
 import { MovieRowComponent } from './movie-row/movie-row.component';
+import { MoviePosterComponent } from './movie-poster/movie-poster.component';
 
 
 
@@ -17,12 +18,14 @@ import { MovieRowComponent } from './movie-row/movie-row.component';
   declarations: [
     HeaderComponent,
     HeaderSearchBarComponent,
-    MovieRowComponent
+    MovieRowComponent,
+    MoviePosterComponent
   ],
   exports: [
     HeaderComponent,
     HeaderSearchBarComponent,
-    MovieRowComponent
+    MovieRowComponent,
+    MoviePosterComponent
   ],
   imports: [
     CommonModule,

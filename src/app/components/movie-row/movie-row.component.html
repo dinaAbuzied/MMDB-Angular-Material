@@ -1,7 +1,6 @@
 <div class="movie-details no-border">
     <div class="poster-container">
-        <div class="no-image" *ngIf="!movie.poster">No Image Available</div>
-        <img class="movie-poster" *ngIf="movie.poster" src="{{movie.poster}}" alt="{{movie.title}}">
+        <app-movie-poster [posterURL]="movie.poster || false"></app-movie-poster>
     </div>
     <div class="details-container">
         <span class="movie-title">{{movie.title}} ({{movie.year}})</span>

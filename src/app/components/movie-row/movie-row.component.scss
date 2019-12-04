@@ -17,22 +17,8 @@ $Movie-title-weight: var(--movie-title-weight, bold);
 
 .poster-container {
     width: 32px;
-    height: 48px;
     margin-right: $Poster-margin-right;
-}
-
-.movie-poster {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.no-image {
-    border: 1.5px dashed $Details-color;
-    border-radius: 5px;
-    @include font-setting(5px, false, bolder, false, center);
-    @include square(100%);
-    padding: 7px 0px;
-    white-space: normal;
+    position: relative;
 }
 
 .details-container {

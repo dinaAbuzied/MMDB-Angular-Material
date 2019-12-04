@@ -1,0 +1,4 @@
+<div class="poster-container">
+    <div class="no-image {{size}}" *ngIf="!posterURL">No Image Available</div>
+    <img class="movie-poster" *ngIf="posterURL" src="{{posterURL}}" alt="">
+</div>

@@ -1,0 +1,32 @@
+@import '../../../common_styles/mixins.scss';
+.poster-container {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    overflow: hidden;
+    @include responsive-ratio(2, 3);
+}
+
+.movie-poster {
+    width: 100%;
+    @include abs-position(0, false, false, 0);
+}
+
+.no-image {
+    @include abs-position(0, false, false, 0);
+    @include square(100%);
+    border-radius: 5px;
+    white-space: normal;
+    &.large {
+        padding: 40% 0px;
+        // border: 2px dashed $No-image-color;
+        border: 2px dashed;
+        // @include font-setting(2em, $No-image-color, bolder, false, center);
+        @include font-setting(2em, false, bolder, false, center);
+    }
+    &.small {
+        padding: 7px 0px;
+        border: 1.5px dashed;
+        @include font-setting(5px, false, bolder, false, center);
+    }
+}
