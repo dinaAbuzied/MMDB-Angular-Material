@@ -40,4 +40,8 @@ export class MovieListComponent implements OnInit {
     this.currentMovieList = this.listExpanded ? [...this.movieList] : this.movieList.slice(0, 5);
   }
 
+  toggleUserList(list: string, movie) {
+    movie[list] = !movie[list];
+  }
+
 }
