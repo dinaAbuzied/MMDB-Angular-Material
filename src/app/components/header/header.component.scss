@@ -21,6 +21,7 @@ li {
     text-decoration: none;
     padding: 10px 15px;
     height: 100%;
+    border-radius: 0;
     &.active {
         background-color: var(--color3);
         font-weight: bold;
@@ -36,11 +37,14 @@ li {
 }
 
 .mat-menu-trigger {
-    display: flex;
-    align-items: center;
     height: 100%;
     background: transparent;
     @include font-setting(1em, var(--primary-color));
+}
+
+.menu-trigger-cont {
+    display: flex;
+    align-items: center;
 }
 
 .img-cont {

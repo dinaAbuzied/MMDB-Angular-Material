@@ -1,1 +1,22 @@
-<p>movie-details works!</p>
+<div class="movie-details-container">
+    <header>
+        <button mat-icon-button mat-dialog-close cdkFocusInitial>
+                <mat-icon>close</mat-icon>
+        </button>
+    </header>
+    <div class="movie-details">
+        <div class="flex-3">
+            <app-movie-poster [posterURL]="movie.poster || false"></app-movie-poster>
+        </div>
+        <div class="flex-9">
+            <h2 class="movie-title no-margin">{{movie.title}} ({{movie.year}})</h2>
+            <div class="side-details">
+                <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.time}} | {{movie.date}}
+                <a href="https://www.youtube.com/watch?v={{movie.trailer.key}}" target="_blank" *ngIf="movie.trailer" class="pull-right utube" title="watch trailer">
+                    <img src="../../../assets/img/YouTube-icon-full_color.png" alt="watch trailer">
+                </a>
+            </div>
+            <p class="movie-plot">{{movie.details}}</p>
+        </div>
+    </div>
+</div>

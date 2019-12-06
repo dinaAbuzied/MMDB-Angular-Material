@@ -9,7 +9,6 @@
                 </a>
             </li>
             <li>
-                <!-- <app-header-search-bar></app-header-search-bar> -->
                 <ng-content></ng-content>
             </li>
             <li>
@@ -35,11 +34,13 @@
             </li>
             <li class="last-item">
                 <button no-border pull-right mat-button [matMenuTriggerFor]="menu" aria-label="more options">
-                        <div class="img-cont">
-                                <img src="../../../assets/img/profile.jpg" alt="user profile">
+                        <div class="menu-trigger-cont">
+                                <div class="img-cont">
+                                        <img src="../../../assets/img/profile.jpg" alt="user profile">
+                                </div>
+                                Dina
+                                    <mat-icon>arrow_drop_down</mat-icon>
                         </div>
-                        Dina
-                            <mat-icon>arrow_drop_down</mat-icon>
                           </button>
                 <mat-menu class="nav-options" #menu="matMenu">
                     <a href="/home" mat-menu-item>

@@ -81,6 +81,12 @@ input[type=submit] {
     float: right;
 }
 
+.movie-details-dialog .mat-dialog-container {
+    @extend .no-padding;
+    background-color: var(--color2);
+    border: 0.5px solid var(--color4);
+}
+
 .visually-hidden {
     position: absolute !important;
     @include square(1px);

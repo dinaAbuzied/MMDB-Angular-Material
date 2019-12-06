@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderSearchBarComponent } from './header-search-bar/header-search-bar.component';
 import { MovieRowComponent } from './movie-row/movie-row.component';
 import { MoviePosterComponent } from './movie-poster/movie-poster.component';
@@ -38,7 +40,9 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   entryComponents: [MovieDetailsComponent]
 })

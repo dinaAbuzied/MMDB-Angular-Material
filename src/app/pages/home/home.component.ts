@@ -44,10 +44,10 @@ export class HomeComponent implements OnInit {
   }
 
   showMovieDetails(id: number) {
-    // console.log(id);
     const dialogRef = this.detailsDialog.open(MovieDetailsComponent, {
-      width: '250px',
-      data: {id}
+      data: {id},
+      panelClass: 'movie-details-dialog',
+      width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

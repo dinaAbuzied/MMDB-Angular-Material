@@ -2,6 +2,7 @@
     <app-header-search-bar (selectMovie)="showMovieDetails($event)"></app-header-search-bar>
 </app-header>
 <main class="container">
+    <!-- TODO: add H1 tag -->
     <section class="movie-lists">
         <app-movie-list (selectMovie)="showMovieDetails($event)" [movieList]="nowPlaying" [title]="'Now Playing'"></app-movie-list>
         <app-movie-list (selectMovie)="showMovieDetails($event)" [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
