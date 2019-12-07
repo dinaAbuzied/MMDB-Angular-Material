@@ -4,11 +4,18 @@
                 <mat-icon>close</mat-icon>
         </button>
     </header>
-    <div class="movie-details">
-        <div class="flex-3">
-            <app-movie-poster [posterURL]="movie.poster || false"></app-movie-poster>
+    <main class="movie-details">
+        <div class="flex-3 left-side">
+            <app-movie-poster [size]="'large'" [posterURL]="movie.poster || false"></app-movie-poster>
+            <div class="imdb-cont" *ngIf="movie.imdb">
+                <span class="imdbRatingPlugin" data-style="p1" attr.data-title="{{movie.imdb}}">
+                    <a href="http://www.imdb.com/title/{{movie.imdb}}/?ref_=plg_rt_1">
+                        <img src="{{imdbLogo}}" alt="'{{movie.title}}' on IMDb" />
+                    </a>
+                </span>
+            </div>
         </div>
-        <div class="flex-9">
+        <div class="flex-9 right-side">
             <h2 class="movie-title no-margin">{{movie.title}} ({{movie.year}})</h2>
             <div class="side-details">
                 <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.time}} | {{movie.date}}
@@ -18,5 +25,74 @@
             </div>
             <p class="movie-plot">{{movie.details}}</p>
         </div>
-    </div>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
+                cast and crew
+            </mat-expansion-panel-header>
+            <div class="panel-body">
+                <section>
+                    <h3>Directed By</h3>
+                    <div class="credit-cont">
+                        <div *ngFor="let director of movie.credit.directors" class="crew-card">
+                            <div class="crew-poster">
+                                <app-movie-poster [posterURL]="director.profile_path || false"></app-movie-poster>
+                            </div>
+                            <div class="crew-details">
+                                <label class="name">{{director.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Written By</h3>
+                    <div class="credit-cont">
+                        <div *ngFor="let writer of movie.credit.writers" class="crew-card">
+                            <div class="crew-poster">
+                                <app-movie-poster [posterURL]="writer.profile_path || false"></app-movie-poster>
+                            </div>
+                            <div class="crew-details">
+                                <label class="name">{{writer.name}}</label>
+                                <label class="job">({{writer.job}})</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Cast</h3>
+                    <div class="credit-cont">
+                        <div *ngFor="let actor of movie.credit.cast" class="crew-card">
+                            <div class="crew-poster">
+                                <app-movie-poster [posterURL]="actor.profile_path || false"></app-movie-poster>
+                            </div>
+                            <div class="crew-details">
+                                <label class="name">{{actor.name}}</label>
+                                <label class="job">as {{actor.role}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </mat-expansion-panel>
+        <div class="flex-12 genres">
+            <span class="genre" *ngFor="let genre of movie.genres; let i = index">{{genre}} {{i < movie.genres.length-1 ? '| ' : ''}}</span>
+        </div>
+    </main>
+    <footer>
+        <button (click)="toggleUserList('fav', movie)" aria-label="add to favorites" title="Favorites" class="user-list fav" [ngClass]="{'active': movie.fav}">
+                    <span class="top-border"></span>
+                    <mat-icon>favorite</mat-icon>
+                </button>
+        <button (click)="toggleUserList('later', movie)" aria-label="add to watch later" title="Watch Later" class="user-list later" [ngClass]="{'active': movie.later}">
+                        <span class="top-border"></span>
+                        <mat-icon>remove_red_eye</mat-icon>
+                </button>
+        <button (click)="toggleUserList('list', movie)" aria-label="add to wish list" title="Wish List" class="user-list wish" [ngClass]="{'active': movie.list}">
+                        <span class="top-border"></span>
+                        <mat-icon>card_giftcard</mat-icon>
+                </button>
+        <button (click)="toggleUserList('own', movie)" aria-label="add to own it" title="Own it" class="user-list own" [ngClass]="{'active': movie.own}">
+                        <span class="top-border"></span>
+                        <mat-icon>inbox</mat-icon>
+                </button>
+    </footer>
 </div>

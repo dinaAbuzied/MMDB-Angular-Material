@@ -54,7 +54,7 @@ main {
 .poster-container {
     width: 100%;
     background-color: transparent;
-    color: var(--color4);
+    @include font-setting(1.450em, var(--color4));
 }
 
 .overlay {
@@ -66,49 +66,5 @@ main {
 }
 
 .user-list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    border-width: 0 0.5px 0 0.5px;
-    border-color: var(--color2);
-    background-color: var(--color3);
-    @include font-setting(1.375em, #000, bold, false, center);
     padding: 12px 0 8px;
-    .top-border {
-        width: calc(100% - 1px);
-        height: 6px;
-        @include abs-position(0, .5px);
-    }
-    .mat-icon {
-        text-shadow: 0px 1px 0px #ffffff;
-        opacity: 0.2;
-    }
-    $icons: (fav, later, wish, own);
-    @each $icon in $icons {
-        &.#{$icon} {
-            @include hover-focus {
-                .mat-icon {
-                    text-shadow: none;
-                    opacity: 1;
-                    color: var(--#{$icon});
-                }
-            }
-            .top-border {
-                background-color: var(--#{$icon});
-            }
-            &.active {
-                background-color: var(--#{$icon});
-                .top-border {
-                    background-color: var(--#{$icon}-darker);
-                }
-                @include hover-focus {
-                    .mat-icon {
-                        color: var(--#{$icon}-darker);
-                    }
-                }
-            }
-        }
-    }
 }

@@ -12,7 +12,7 @@
 <main>
     <div class="movie-card" *ngFor="let movie of currentMovieList">
         <button class="poster-container no-border no-padding" (click)="onSelectMovie(movie.id)">
-                <app-movie-poster [posterURL]="movie.poster || false" [size]="'large'"></app-movie-poster>
+                <app-movie-poster [title]="movie.title" [posterURL]="movie.poster || false" [size]="'large'"></app-movie-poster>
         </button>
         <div class="overlay">
             <button (click)="toggleUserList('fav', movie)" aria-label="add to favorites" title="Favorites" class="user-list fav" [ngClass]="{'active': movie.fav}">

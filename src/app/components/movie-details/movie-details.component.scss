@@ -1,14 +1,13 @@
+@import '../../../common_styles/mixins.scss';
 .movie-details-container {
     position: relative;
-    padding: 30px 15px;
+    padding: 30px 15px 0;
     color: var(--primary-color);
     overflow: hidden;
 }
 
 button[mat-dialog-close] {
-    position: absolute;
-    top: 0;
-    right: 0;
+    @include abs-position(0, 0);
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .2;
@@ -16,38 +15,52 @@ button[mat-dialog-close] {
 
 .movie-details {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .flex-3 {
     flex: 3;
-    max-width: 25%;
+    flex-basis: 25%;
 }
 
 .flex-9 {
     flex: 9;
-    max-width: 75%;
+    flex-basis: 75%;
 }
 
-.flex-9 {
+.flex-12 {
+    flex: 12;
+    flex-basis: 100%;
+}
+
+.left-side {
+    @include font-setting(1.250em, var(--color4));
+}
+
+.right-side {
     padding: 0 15px;
 }
 
+.genres {
+    border-top: 1px solid var(--color4);
+    @include font-setting(0.875em, var(--color4));
+    text-transform: capitalize;
+    padding: 5px 0 15px;
+}
+
 .movie-title {
-    font-weight: normal;
-    font-size: 1.500em;
-    line-height: 1.42857143;
+    @include font-setting(1.500em, false, normal, false, false, 1.42857143);
 }
 
 .side-details {
-    display: block;
-    font-size: 0.875em;
-    color: var(--color4);
+    display: flex;
+    align-items: center;
+    @include font-setting(0.875em, var(--color4));
 }
 
 .movie-plot {
     margin: 10px 0;
-    font-size: 0.875em;
-    line-height: 1.42857143;
+    @include font-setting(0.875em, false, false, false, false, 1.42857143);
     min-height: 165px;
 }
 
@@ -60,5 +73,112 @@ button[mat-dialog-close] {
     margin-left: auto;
     img {
         max-width: 100%;
+    }
+}
+
+footer {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    display: flex;
+    height: 52px;
+}
+
+.user-list {
+    padding: 15px 0;
+}
+
+.imdb-cont {
+    display: flex;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.imdbRatingPlugin {
+    border: 0.5px solid var(--color4);
+    background-color: var(--color3);
+    padding: 5px;
+    margin: 5px auto;
+    overflow: hidden;
+     ::ng-deep {
+        .rating {
+            margin-left: 5px;
+            @include font-setting(false, white, normal);
+        }
+        .ofTen {
+            color: var(--color4);
+        }
+    }
+}
+
+.mat-expansion-panel {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    margin-top: -45px;
+     ::ng-deep {
+        .mat-expansion-panel-body {
+            padding: 0;
+        }
+    }
+}
+
+.mat-expansion-panel-header {
+    width: 120px;
+    margin-left: auto;
+    border: 0.5px solid var(--color4);
+    background-color: var(--color3);
+    border-radius: 5px;
+    padding: 5px 8px;
+    @include font-setting(0.875em, var(--primary-color), bold, false, left);
+    white-space: inherit;
+     ::ng-deep {
+        .mat-expansion-indicator::after {
+            margin-top: -6px;
+        }
+    }
+}
+
+.panel-body {
+    margin-top: 10px;
+    border-top: 1px solid var(--color4);
+    section {
+        overflow: hidden;
+    }
+}
+
+h3 {
+    margin: 10px 0;
+    font-size: 1.286em;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.credit-cont {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px 0;
+}
+
+.crew-card {
+    display: flex;
+    flex: 1;
+    flex-basis: 50%;
+    margin: 5px 0;
+}
+
+.crew-poster {
+    width: 40px;
+    margin: 0 15px;
+    @include font-setting(7px, var(--color4));
+}
+
+.crew-details {
+    .name {
+        display: block;
+        width: 100%;
+        @include font-setting(1em, var(--primary-color), normal);
+    }
+    .job {
+        @include font-setting(0.857em, var(--color4), false, italic);
     }
 }

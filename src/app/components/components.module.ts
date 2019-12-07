@@ -14,6 +14,7 @@ import { HeaderSearchBarComponent } from './header-search-bar/header-search-bar.
 import { MovieRowComponent } from './movie-row/movie-row.component';
 import { MoviePosterComponent } from './movie-poster/movie-poster.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -42,7 +43,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     MatMenuModule,
     MatDividerModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   entryComponents: [MovieDetailsComponent]
 })
