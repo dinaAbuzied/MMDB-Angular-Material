@@ -2,11 +2,13 @@
 
 // @import 'themes/theme-blue.scss';
 @import 'common_styles/mixins.scss';
-@font-face {
-    font-family: 'gotham';
-    src: url("./assets/font/gotham/GOTHAM-LIGHT.TTF"), url("./assets/font/gotham/GOTHAM-BLACK.TTF");
-}
-
+@import '~@angular/material/theming';
+// @font-face {
+//     font-family: 'gotham';
+//     src: url("./assets/font/gotham/GOTHAM-LIGHT.TTF"), url("./assets/font/gotham/GOTHAM-BLACK.TTF");
+// }
+$custom-typography: mat-typography-config( $font-family: 'Droid Sans, sans-serif');
+@include angular-material-typography($custom-typography);
 :root {
     --primary-color: #fff;
     --primary-color-opacity: rgba(255, 255, 255, 0.5);
@@ -110,28 +112,20 @@ input[type=submit] {
     border-width: 0;
     border-color: var(--color2);
     background-color: var(--color3);
-    @include font-setting(1.375em,
-    #000,
-    bold,
-    false,
-    center);
+    @include font-setting(1.375em, #000, bold, false, center);
     &:not(:last-child) {
         border-right-width: 0.5px;
     }
     .top-border {
         width: calc(100% - .5px);
         height: 6px;
-        @include abs-position(0,
-        .5px);
+        @include abs-position(0, .5px);
     }
     .mat-icon {
         text-shadow: 0px 1px 0px #ffffff;
         opacity: 0.2;
     }
-    $icons: (fav,
-    later,
-    wish,
-    own);
+    $icons: (fav, later, wish, own);
     @each $icon in $icons {
         &.#{$icon} {
             @include hover-focus {
