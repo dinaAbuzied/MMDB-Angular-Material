@@ -1,0 +1,120 @@
+@import '../../../common_styles/mixins.scss';
+.signin-page {
+    @include square(100%);
+     ::ng-deep {
+        .mat-form-field-flex:focus-within {
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+        .mat-form-field-outline {
+            opacity: 1;
+        }
+        .mat-form-field-outline-thick {
+            opacity: 0;
+        }
+        .mat-form-field-outline,
+        .mat-form-field-outline-thick {
+            top: 0;
+        }
+        .mat-form-field-prefix {
+            top: -4px;
+        }
+        .mat-form-field-infix {
+            padding: 0 10px;
+            border: none;
+        }
+        .mat-form-field-outline-start,
+        .mat-form-field-outline-end {
+            border-radius: 0;
+            border-color: var(--color4);
+        }
+        .mat-form-field-label-wrapper {
+            left: 10px
+        }
+        input.mat-input-element {
+            height: 35px;
+            padding: .4375em 0;
+            color: var(--primary-color);
+            &:focus {
+                box-shadow: none;
+            }
+            &::placeholder {
+                color: var(--color4);
+            }
+        }
+    }
+}
+
+.background-cont {
+    @include abs-position(0, false, false, 0);
+    &::after {
+        content: '';
+        display: block;
+        @include abs-position(0, false, false, 0);
+        @include square(100%);
+        opacity: 0.9;
+        background: var(--color1);
+    }
+    img {
+        min-width: 100%;
+        min-height: 100%;
+    }
+}
+
+.box-cont {
+    display: flex;
+    width: 750px;
+    height: 400px;
+    @include centerer();
+}
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+%sign-cont {
+    @extend %flex-column;
+    justify-content: center;
+    padding: 30px;
+}
+
+@mixin sign-cont($width, $color1, $color2, $button) {
+    width: $width;
+    background-color: $color1;
+    @extend %sign-cont;
+     ::ng-deep {
+        .mat-form-field-flex {
+            background-color: $color2;
+        }
+    }
+    button {
+        background-color: $button;
+    }
+}
+
+.signup-cont {
+    @include sign-cont(60%, var(--color3), var(--color2), var(--fav));
+}
+
+.signin-cont {
+    @include sign-cont(40%, var(--color2), var(--color3), var(--later));
+}
+
+h2 {
+    @include font-setting(1.500em, var(--primary-color), false, false, center);
+}
+
+form {
+    @extend %flex-column;
+}
+
+.mat-form-field {
+    margin-top: 2px;
+    @include font-setting(0.875em, var(--color4));
+}
+
+button {
+    border-radius: 0;
+    margin: 10px 0 15px;
+    @include font-setting(1.125em, var(--primary-color), bold);
+}
