@@ -60,44 +60,23 @@
     }
 }
 
-.box-cont {
-    display: flex;
-    width: 750px;
-    height: 400px;
-    @include centerer();
-}
-
 %flex-column {
     display: flex;
     flex-direction: column;
 }
 
-%sign-cont {
+.signin-cont {
     @extend %flex-column;
     justify-content: center;
     padding: 30px;
-}
-
-@mixin sign-cont($width, $color1, $color2, $button) {
-    width: $width;
-    background-color: $color1;
-    @extend %sign-cont;
+    @include square(400px);
+    @include centerer();
+    background-color: var(--color3);
      ::ng-deep {
         .mat-form-field-flex {
-            background-color: $color2;
+            background-color: var(--color2);
         }
     }
-    button {
-        background-color: $button;
-    }
-}
-
-.signup-cont {
-    @include sign-cont(60%, var(--color3), var(--color2), var(--fav));
-}
-
-.signin-cont {
-    @include sign-cont(40%, var(--color2), var(--color3), var(--later));
 }
 
 h2 {
@@ -116,5 +95,34 @@ form {
 button {
     border-radius: 0;
     margin: 10px 0 15px;
-    @include font-setting(1.125em, var(--primary-color), bold);
+    @include font-setting(1, var(--primary-color), bold);
+    &.user-btn {
+        background-color: var(--later);
+    }
+    &.guest-btn {
+        background-color: var(--fav);
+    }
+}
+
+%before-after {
+    content: '';
+    @include abs-position(50%);
+    display: block;
+    width: 30%;
+    height: 1px;
+    background-color: var(--color4);
+}
+
+.breaker {
+    @include font-setting(0.875em, var(--color4), 900, false, center);
+    position: relative;
+    margin: 2px 0;
+    &::before {
+        @extend %before-after;
+        left: calc(50% - 36%);
+    }
+    &::after {
+        @extend %before-after;
+        right: calc(50% - 36%);
+    }
 }

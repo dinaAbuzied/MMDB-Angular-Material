@@ -1,44 +1,22 @@
 <div class="signin-page">
     <h1 class="visually-hidden">Sign In Page</h1>
     <div class="background-cont">
-        <img src="https://image.tmdb.org/t/p/w1280/DT6fpXyEtRu7fB0ully7KBAoRp.jpg" alt="">
+        <img src="../../../assets/img/sign-in-bg.jpg" alt="">
     </div>
-    <div class="box-cont">
-        <div class="signup-cont">
-            <h2>Sign Up</h2>
-            <form class="signup-form">
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>person</mat-icon>
-                    <input type="text" matInput placeholder="Username" aria-label="Username">
-                </mat-form-field>
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="E-mail" aria-label="E-mail">
-                </mat-form-field>
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>lock</mat-icon>
-                    <input type="password" matInput placeholder="Password" aria-label="Password">
-                </mat-form-field>
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>lock</mat-icon>
-                    <input type="password" matInput placeholder="Confirm Password" aria-label="Confirm Password">
-                </mat-form-field>
-            </form>
-            <button type="submit" mat-flat-button>Sign Up</button>
-        </div>
-        <div class="signin-cont">
-            <h2>Sign In</h2>
-            <form class="signin-form">
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>email</mat-icon>
-                    <input type="text" matInput placeholder="E-mail" aria-label="E-mail">
-                </mat-form-field>
-                <mat-form-field [floatLabel]="'never'" appearance="outline">
-                    <mat-icon matPrefix>lock</mat-icon>
-                    <input type="password" matInput placeholder="Password" aria-label="Password">
-                </mat-form-field>
-            </form>
-            <button type="submit" mat-flat-button routerLink="/home">Sign In</button>
-        </div>
+    <div class="signin-cont">
+        <h2>Sign In</h2>
+        <form class="signup-form">
+            <mat-form-field [floatLabel]="'never'" appearance="outline">
+                <mat-icon matPrefix>person</mat-icon>
+                <input type="text" matInput placeholder="Name" aria-label="Name">
+            </mat-form-field>
+            <mat-form-field [floatLabel]="'never'" appearance="outline">
+                <mat-icon matPrefix>vpn_key</mat-icon>
+                <input type="password" matInput placeholder="API Key" aria-label="API Key">
+            </mat-form-field>
+        </form>
+        <button class="user-btn" type="submit" mat-flat-button>Sign In</button>
+        <span class="breaker">OR</span>
+        <button class="guest-btn" type="submit" mat-flat-button routerLink="/home">Continue As Guest</button>
     </div>
 </div>
