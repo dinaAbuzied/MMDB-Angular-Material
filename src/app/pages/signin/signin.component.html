@@ -5,18 +5,27 @@
     </div>
     <div class="signin-cont">
         <h2>Sign In</h2>
-        <form class="signup-form">
+        <form class="signin-form" [formGroup]="signInForm" (ngSubmit)="onLogin('user')">
             <mat-form-field [floatLabel]="'never'" appearance="outline">
                 <mat-icon matPrefix>person</mat-icon>
-                <input type="text" matInput placeholder="Name" aria-label="Name">
+                <input type="text" matInput placeholder="Name" aria-label="Name" formControlName="name">
+                <mat-error *ngIf="name.errors && name.errors.required">
+                    Name is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
             <mat-form-field [floatLabel]="'never'" appearance="outline">
                 <mat-icon matPrefix>vpn_key</mat-icon>
-                <input type="password" matInput placeholder="API Key" aria-label="API Key">
+                <input type="password" matInput placeholder="API Key" aria-label="API Key" formControlName="key">
+                <mat-error *ngIf="key.errors && (key.errors.minlength || key.errors.maxlength)">
+                    API Key should contains 32 characters
+                </mat-error>
+                <mat-error *ngIf="key.errors && key.errors.required">
+                    API Key is <strong>required</strong>
+                </mat-error>
             </mat-form-field>
+            <button class="user-btn" type="submit" mat-flat-button>Sign In</button>
         </form>
-        <button class="user-btn" type="submit" mat-flat-button>Sign In</button>
         <span class="breaker">OR</span>
-        <button class="guest-btn" type="submit" mat-flat-button routerLink="/home">Continue As Guest</button>
+        <button class="guest-btn" mat-flat-button (click)="onLogin('guest')">Continue As Guest</button>
     </div>
 </div>
