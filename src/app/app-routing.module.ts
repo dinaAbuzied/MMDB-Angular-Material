@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'signin', loadChildren: './pages/signin/signin.module#SigninModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomeModule', canActivate: [AuthGuard] },
+  { path: '**', loadChildren: './pages/page-not-found/page-not-found.module#PageNotFoundModule' }
 ];
 
 @NgModule({
