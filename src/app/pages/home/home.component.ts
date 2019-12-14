@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   wishListData;
   wishListHeader;
 
-  constructor(public detailsDialog: MatDialog) {
+  constructor(public detailsDialog: MatDialog, private movies: MoviesService) {
     this.nowPlaying = movieList.map(movie => {
       return {...movie};
     });
@@ -38,6 +39,16 @@ export class HomeComponent implements OnInit {
       icon: 'card_giftcard',
       class: 'list'
     };
+
+    movies.getNowPlaying().subscribe(data => {
+      // for (const d of (data as any)) {
+      //   this.smartphone.push({
+      //     name: d.name,
+      //     price: d.price
+      //   });
+      // }
+      console.log(data);
+    });
   }
 
   ngOnInit() {
