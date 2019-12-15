@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { MoviesService } from '../../services/movies.service';
+import { Movie } from '../../interfaces/movies.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,20 +10,20 @@ import { MoviesService } from '../../services/movies.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  nowPlaying;
-  comingSoon;
+  nowPlaying: Movie[];
+  comingSoon: Movie[];
   watchLaterData;
   watchLaterHeader;
   wishListData;
   wishListHeader;
 
   constructor(public detailsDialog: MatDialog, private movies: MoviesService) {
-    this.nowPlaying = movieList.map(movie => {
-      return {...movie};
-    });
-    this.comingSoon = movieList.map(movie => {
-      return {...movie};
-    });
+    // this.nowPlaying = movieList.map(movie => {
+    //   return {...movie};
+    // });
+    // this.comingSoon = movieList.map(movie => {
+    //   return {...movie};
+    // });
     this.watchLaterData = sideMovieList.map(movie => {
       return {...movie};
     });
@@ -39,19 +40,15 @@ export class HomeComponent implements OnInit {
       icon: 'card_giftcard',
       class: 'list'
     };
-
-    movies.getNowPlaying().subscribe(data => {
-      // for (const d of (data as any)) {
-      //   this.smartphone.push({
-      //     name: d.name,
-      //     price: d.price
-      //   });
-      // }
-      console.log(data);
-    });
   }
 
   ngOnInit() {
+    this.movies.getNowPlaying().subscribe(data => {
+      this.nowPlaying = data;
+    });
+    this.movies.getUpComing().subscribe(data => {
+      this.comingSoon = data;
+    });
   }
 
   showMovieDetails(id: number) {

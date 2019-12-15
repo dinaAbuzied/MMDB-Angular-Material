@@ -35,6 +35,7 @@ export class MovieListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.movieList, this.title);
     this.currentMovieList = this.movieList.slice(0, 5);
   }
 
