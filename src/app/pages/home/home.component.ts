@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../interfaces/movies.interface';
+import { LocalMoviesService } from '../../services/local-movies.service';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,9 @@ export class HomeComponent implements OnInit {
   wishListData;
   wishListHeader;
 
-  constructor(public detailsDialog: MatDialog, private movies: MoviesService) {
-    // this.nowPlaying = movieList.map(movie => {
-    //   return {...movie};
-    // });
-    // this.comingSoon = movieList.map(movie => {
-    //   return {...movie};
-    // });
+  constructor(public detailsDialog: MatDialog,
+              private movies: MoviesService,
+              private lm: LocalMoviesService) {
     this.watchLaterData = sideMovieList.map(movie => {
       return {...movie};
     });
@@ -49,11 +46,20 @@ export class HomeComponent implements OnInit {
     this.movies.getUpComing().subscribe(data => {
       this.comingSoon = data;
     });
+    // this.movies.getMovieDetails(512200).subscribe(data => {
+    //   console.log(data);
+    // });
+  }
+
+  updateMovieList({movieID, list}) {
+    this.lm.updateLocalMovies(movieID, list);
+    this.nowPlaying = this.lm.updateMovies(this.nowPlaying, movieID, list);
+    this.comingSoon = this.lm.updateMovies(this.comingSoon, movieID, list);
   }
 
   showMovieDetails(id: number) {
     const dialogRef = this.detailsDialog.open(MovieDetailsComponent, {
-      data: {id},
+      data: { id },
       panelClass: 'movie-details-dialog',
       width: '600px'
     });
@@ -63,62 +69,6 @@ export class HomeComponent implements OnInit {
     });
   }
 }
-
-const movieList: Array<{
-  id: number,
-  title: string,
-  poster?: string,
-  fav?: boolean,
-  later?: boolean,
-  list?: boolean,
-  own?: boolean
-}> = [{
-  id: 1,
-  title: 'Knives Out',
-  poster: 'https://image.tmdb.org/t/p/w342/pThyQovXQrw2m0s9x82twj48Jq4.jpg',
-  later: true
-}, {
-  id: 2,
-  title: 'Stay Out Stay Alive'
-}, {
-  id: 3,
-  title: 'Never Surrender: A Galaxy Quest Documentary',
-  poster: 'https://image.tmdb.org/t/p/w342/40Tje7U3S6LwNL2KRothPEmgw7H.jpg',
-  fav: true
-}, {
-  id: 1,
-  title: 'The Courier',
-  poster: 'https://image.tmdb.org/t/p/w342/ApZ6eymKwLJJnwxb9JskYRdjq7j.jpg',
-  list: true,
-}, {
-  id: 1,
-  title: 'A Beautiful Day in the Neighborhood',
-  poster: 'https://image.tmdb.org/t/p/w342/hoydgw429fYlYIGrPIjAdpftL8z.jpg',
-  own: true
-}, {
-  id: 1,
-  title: 'Knives Out',
-  poster: 'https://image.tmdb.org/t/p/w342/pThyQovXQrw2m0s9x82twj48Jq4.jpg',
-  later: true
-}, {
-  id: 1,
-  title: 'Stay Out Stay Alive'
-}, {
-  id: 1,
-  title: 'Never Surrender: A Galaxy Quest Documentary',
-  poster: 'https://image.tmdb.org/t/p/w342/40Tje7U3S6LwNL2KRothPEmgw7H.jpg',
-  fav: true
-}, {
-  id: 1,
-  title: 'The Courier',
-  poster: 'https://image.tmdb.org/t/p/w342/ApZ6eymKwLJJnwxb9JskYRdjq7j.jpg',
-  list: true,
-}, {
-  id: 1,
-  title: 'A Beautiful Day in the Neighborhood',
-  poster: 'https://image.tmdb.org/t/p/w342/hoydgw429fYlYIGrPIjAdpftL8z.jpg',
-  own: true
-}];
 
 const sideMovieList: Array<{
   id: number,

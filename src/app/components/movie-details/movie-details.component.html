@@ -1,4 +1,4 @@
-<div class="movie-details-container">
+<div class="movie-details-container" *ngIf="movie">
     <header>
         <button mat-icon-button mat-dialog-close cdkFocusInitial>
                 <mat-icon>close</mat-icon>
@@ -7,23 +7,23 @@
     <main class="movie-details">
         <div class="flex-3 left-side">
             <app-movie-poster [size]="'large'" [posterURL]="movie.poster || false"></app-movie-poster>
-            <div class="imdb-cont" *ngIf="movie.imdb">
-                <span class="imdbRatingPlugin" data-style="p1" attr.data-title="{{movie.imdb}}">
-                    <a href="http://www.imdb.com/title/{{movie.imdb}}/?ref_=plg_rt_1">
+            <div class="imdb-cont" *ngIf="movie.imdb_id">
+                <span class="imdbRatingPlugin" data-style="p1" attr.data-title="{{movie.imdb_id}}">
+                    <a href="http://www.imdb.com/title/{{movie.imdb_id}}/?ref_=plg_rt_1">
                         <img src="{{imdbLogo}}" alt="'{{movie.title}}' on IMDb" />
                     </a>
                 </span>
             </div>
         </div>
         <div class="flex-9 right-side">
-            <h2 class="movie-title no-margin">{{movie.title}} ({{movie.year}})</h2>
+            <h2 class="movie-title no-margin">{{movie.title}} ({{movie.release_date.year}})</h2>
             <div class="side-details">
-                <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.time}} | {{movie.date}}
-                <a href="https://www.youtube.com/watch?v={{movie.trailer.key}}" target="_blank" *ngIf="movie.trailer" class="pull-right utube" title="watch trailer">
+                <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.runtime}} | {{movie.release_date.day}} {{movie.release_date.month}} {{movie.release_date.year}}
+                <a href="https://www.youtube.com/watch?v={{movie.trailer}}" target="_blank" *ngIf="movie.trailer" class="pull-right utube" title="watch trailer">
                     <img src="../../../assets/img/YouTube-icon-full_color.png" alt="watch trailer">
                 </a>
             </div>
-            <p class="movie-plot">{{movie.details}}</p>
+            <p class="movie-plot">{{movie.overview}}</p>
         </div>
         <mat-expansion-panel>
             <mat-expansion-panel-header [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
@@ -33,7 +33,7 @@
                 <section>
                     <h3>Directed By</h3>
                     <div class="credit-cont">
-                        <div *ngFor="let director of movie.credit.directors" class="crew-card">
+                        <div *ngFor="let director of credit.directors" class="crew-card">
                             <div class="crew-poster">
                                 <app-movie-poster [posterURL]="director.profile_path || false"></app-movie-poster>
                             </div>
@@ -46,7 +46,7 @@
                 <section>
                     <h3>Written By</h3>
                     <div class="credit-cont">
-                        <div *ngFor="let writer of movie.credit.writers" class="crew-card">
+                        <div *ngFor="let writer of credit.writers" class="crew-card">
                             <div class="crew-poster">
                                 <app-movie-poster [posterURL]="writer.profile_path || false"></app-movie-poster>
                             </div>
@@ -60,7 +60,7 @@
                 <section>
                     <h3>Cast</h3>
                     <div class="credit-cont">
-                        <div *ngFor="let actor of movie.credit.cast" class="crew-card">
+                        <div *ngFor="let actor of credit.cast" class="crew-card">
                             <div class="crew-poster">
                                 <app-movie-poster [posterURL]="actor.profile_path || false"></app-movie-poster>
                             </div>
@@ -78,21 +78,9 @@
         </div>
     </main>
     <footer>
-        <button (click)="toggleUserList('fav', movie)" aria-label="add to favorites" title="Favorites" class="user-list fav" [ngClass]="{'active': movie.fav}">
-                    <span class="top-border"></span>
-                    <mat-icon>favorite</mat-icon>
-                </button>
-        <button (click)="toggleUserList('later', movie)" aria-label="add to watch later" title="Watch Later" class="user-list later" [ngClass]="{'active': movie.later}">
-                        <span class="top-border"></span>
-                        <mat-icon>remove_red_eye</mat-icon>
-                </button>
-        <button (click)="toggleUserList('list', movie)" aria-label="add to wish list" title="Wish List" class="user-list wish" [ngClass]="{'active': movie.list}">
-                        <span class="top-border"></span>
-                        <mat-icon>card_giftcard</mat-icon>
-                </button>
-        <button (click)="toggleUserList('own', movie)" aria-label="add to own it" title="Own it" class="user-list own" [ngClass]="{'active': movie.own}">
-                        <span class="top-border"></span>
-                        <mat-icon>inbox</mat-icon>
-                </button>
+        <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(list.type)}">
+            <span class="top-border"></span>
+            <mat-icon>{{list.icon}}</mat-icon>
+        </button>
     </footer>
 </div>

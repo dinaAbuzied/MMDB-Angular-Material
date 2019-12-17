@@ -34,6 +34,7 @@ button[mat-dialog-close] {
 }
 
 .left-side {
+    z-index: 1;
     @include font-setting(1.250em, var(--color4));
 }
 

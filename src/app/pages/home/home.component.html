@@ -4,8 +4,8 @@
 <main class="container">
     <!-- TODO: add H1 tag -->
     <section class="movie-lists">
-        <app-movie-list (selectMovie)="showMovieDetails($event)" *ngIf="nowPlaying" [movieList]="nowPlaying" [title]="'Now Playing'"></app-movie-list>
-        <app-movie-list (selectMovie)="showMovieDetails($event)" *ngIf="comingSoon" [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
+        <app-movie-list (updateList)="updateMovieList($event)" (selectMovie)="showMovieDetails($event)" *ngIf="nowPlaying" [movieList]="nowPlaying" [title]="'Now Playing'"></app-movie-list>
+        <app-movie-list (updateList)="updateMovieList($event)" (selectMovie)="showMovieDetails($event)" *ngIf="comingSoon" [movieList]="comingSoon" [title]="'Coming Soon'"></app-movie-list>
     </section>
     <section class="side-lists">
         <app-side-list (selectMovie)="showMovieDetails($event)" [movieList]="watchLaterData" [header]="watchLaterHeader"></app-side-list>

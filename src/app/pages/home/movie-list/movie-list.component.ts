@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Movie } from '../../../interfaces/movies.interface';
 
 @Component({
   selector: 'app-movie-list',
@@ -7,36 +8,34 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MovieListComponent implements OnInit {
   @Output() selectMovie: EventEmitter<number> = new EventEmitter();
-
-  @Input() movieList: Array<{
-    id: number,
-    title: string,
-    poster?: string,
-    fav?: boolean,
-    later?: boolean,
-    list?: boolean,
-    own?: boolean
-  }> = [];
-
+  @Output() updateList: EventEmitter<{movieID: number, list: string}> = new EventEmitter();
   @Input() title: string;
-
-  currentMovieList: Array<{
-    id: number,
-    title: string,
-    poster?: string,
-    fav?: boolean,
-    later?: boolean,
-    list?: boolean,
-    own?: boolean
-  }>;
-
+  @Input() movieList: Movie[] = [];
+  currentMovieList: Movie[];
+  listsConfig;
   listExpanded: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.movieList, this.title);
     this.currentMovieList = this.movieList.slice(0, 5);
+    this.listsConfig = [{
+      type: 'fav',
+      icon: 'favorite',
+      title: 'Favorites'
+    }, {
+      type: 'later',
+      icon: 'remove_red_eye',
+      title: 'Watch Later'
+    }, {
+      type: 'wish',
+      icon: 'card_giftcard',
+      title: 'Wish List'
+    }, {
+      type: 'own',
+      icon: 'inbox',
+      title: 'Own it'
+    }];
   }
 
   toggleExpandedList() {
@@ -45,8 +44,12 @@ export class MovieListComponent implements OnInit {
     this.currentMovieList = this.listExpanded ? [...this.movieList] : this.movieList.slice(0, 5);
   }
 
-  toggleUserList(list: string, movie) {
-    movie[list] = !movie[list];
+  toggleUserList(list: string, movieID: number) {
+    this.updateList.emit({movieID, list});
+  }
+
+  isActive(movie: Movie, list: string) {
+    return movie.lists.includes(list);
   }
 
   onSelectMovie(id: number) {

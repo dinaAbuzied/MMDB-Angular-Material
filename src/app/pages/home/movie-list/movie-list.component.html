@@ -15,21 +15,9 @@
                 <app-movie-poster [title]="movie.title" [posterURL]="movie.poster || false" [size]="'large'"></app-movie-poster>
         </button>
         <div class="overlay">
-            <button (click)="toggleUserList('fav', movie)" aria-label="add to favorites" title="Favorites" class="user-list fav" [ngClass]="{'active': movie.fav}">
+            <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type, movie.id)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(movie, list.type)}">
                 <span class="top-border"></span>
-                <mat-icon>favorite</mat-icon>
-            </button>
-            <button (click)="toggleUserList('later', movie)" aria-label="add to watch later" title="Watch Later" class="user-list later" [ngClass]="{'active': movie.later}">
-                    <span class="top-border"></span>
-                    <mat-icon>remove_red_eye</mat-icon>
-            </button>
-            <button (click)="toggleUserList('list', movie)" aria-label="add to wish list" title="Wish List" class="user-list wish" [ngClass]="{'active': movie.list}">
-                    <span class="top-border"></span>
-                    <mat-icon>card_giftcard</mat-icon>
-            </button>
-            <button (click)="toggleUserList('own', movie)" aria-label="add to own it" title="Own it" class="user-list own" [ngClass]="{'active': movie.own}">
-                    <span class="top-border"></span>
-                    <mat-icon>inbox</mat-icon>
+                <mat-icon>{{list.icon}}</mat-icon>
             </button>
         </div>
     </div>
