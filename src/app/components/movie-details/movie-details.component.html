@@ -1,4 +1,5 @@
 <div class="movie-details-container" *ngIf="movie">
+    <!-- TODO: add loading -->
     <header>
         <button mat-icon-button mat-dialog-close cdkFocusInitial>
                 <mat-icon>close</mat-icon>
@@ -25,11 +26,11 @@
             </div>
             <p class="movie-plot">{{movie.overview}}</p>
         </div>
-        <mat-expansion-panel>
+        <mat-expansion-panel (opened)="showCredits()">
             <mat-expansion-panel-header [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
                 cast and crew
             </mat-expansion-panel-header>
-            <div class="panel-body">
+            <div class="panel-body" *ngIf="credit">
                 <section>
                     <h3>Directed By</h3>
                     <div class="credit-cont">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
-import { LocalMovie, Movie } from '../interfaces/movies.interface';
+import { LocalMovie, Movie, MovieDetails } from '../interfaces/movies.interface';
 
 @Injectable({
   providedIn: 'root'

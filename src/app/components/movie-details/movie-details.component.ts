@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MoviesService } from '../../services/movies.service';
-import { MovieDetails } from '../../interfaces/movies.interface';
+import { MovieDetails, MovieCredits } from '../../interfaces/movies.interface';
 
 @Component({
   selector: 'app-movie-details',
@@ -9,49 +9,10 @@ import { MovieDetails } from '../../interfaces/movies.interface';
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit, AfterViewInit {
+  @Output() updateList: EventEmitter<{movieID: number, list: string}> = new EventEmitter();
   listsConfig = [];
   movie: MovieDetails;
-  credit = {
-    directors: [{
-      name: 'Brian Kirk',
-      profile_path: 'https://image.tmdb.org/t/p/w185/frC0pXqBMe0ANwwYvFtntuOxvpV.jpg'
-    }],
-    writers: [{
-      name: 'Adam Mervis',
-      job: 'story'
-    }, {
-      name: 'Adam Mervis',
-      job: 'screenplay'
-    }, {
-      name: 'Matthew Michael Carnahan',
-      job: 'screenplay',
-      profile_path: 'https://image.tmdb.org/t/p/w185/dYz8cZsNdgWLW8kA2dQff0cXxnr.jpg'
-    }],
-    cast: [{
-      name: 'Chadwick Boseman',
-      role: 'Andre Davis',
-      profile_path: 'https://image.tmdb.org/t/p/w185/1lz1wLOuPFSRIratMz0SxD3tkJ.jpg'
-    }, {
-      name: 'Stephan James',
-      role: 'Michael',
-      profile_path: 'https://image.tmdb.org/t/p/w185/i3dx4BvgRh4maR03R4rdsgGexlV.jpg'
-    }, {
-      name: 'Sienna Miller',
-      role: 'Frankie Burns',
-      profile_path: 'https://image.tmdb.org/t/p/w185/4LqVTede09s7Dfb7LnK6qzsh4pD.jpg'
-    }, {
-      name: 'Taylor Kitsch',
-      role: 'Ray',
-      profile_path: 'https://image.tmdb.org/t/p/w185/pSl4peDN0veZx89ClhFXKSIOQJH.jpg'
-    }, {
-      name: 'J.K. Simmons',
-      role: 'Captain McKenna',
-      profile_path: 'https://image.tmdb.org/t/p/w185/jPoNW5fugs5h8AbcE7H5OBm04Tm.jpg'
-    }, {
-      name: 'Jamie Neumann',
-      role: 'Leigh'
-    }]
-  };
+  credit: MovieCredits;
   imdbLogo = 'http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png';
 
   constructor(public dialogRef: MatDialogRef<MovieDetailsComponent>,
@@ -63,8 +24,7 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // const { id } = this.data;
-    this.ms.getMovieDetails(512200).subscribe(data => {
+    this.ms.getMovieDetails(this.data.id).subscribe(data => {
       console.log(data);
       this.movie = data;
       this.callIMDB(document, 'script', 'imdb-rating-api');
@@ -88,8 +48,22 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  showCredits() {
+    if (this.credit === undefined) {
+      this.ms.getMovieCredits(this.data.id).subscribe(data => {
+        this.credit = data;
+      });
+    }
+  }
+
   toggleUserList(list: string) {
-    // movie[list] = !movie[list];
+    const movieID = this.data.id;
+    this.updateList.emit({movieID, list});
+    if (this.movie.lists.includes(list)) {
+      this.movie.lists = this.movie.lists.filter(mlist => mlist !== list);
+    } else {
+      this.movie.lists.push(list);
+    }
   }
 
   callIMDB(d, s: string, id: string) {

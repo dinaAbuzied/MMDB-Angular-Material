@@ -46,9 +46,6 @@ export class HomeComponent implements OnInit {
     this.movies.getUpComing().subscribe(data => {
       this.comingSoon = data;
     });
-    // this.movies.getMovieDetails(512200).subscribe(data => {
-    //   console.log(data);
-    // });
   }
 
   updateMovieList({movieID, list}) {
@@ -62,6 +59,10 @@ export class HomeComponent implements OnInit {
       data: { id },
       panelClass: 'movie-details-dialog',
       width: '600px'
+    });
+
+    dialogRef.componentInstance.updateList.subscribe(({movieID, list}) => {
+      this.updateMovieList({movieID, list});
     });
 
     dialogRef.afterClosed().subscribe(result => {

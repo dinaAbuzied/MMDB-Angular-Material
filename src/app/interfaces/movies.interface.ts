@@ -139,3 +139,20 @@ export interface ProductionCountries {
     'iso_3166_1': string;
     'name': string;
 }
+
+export interface MovieCredits {
+    directors: {
+        name: string;
+        profile_path: string;
+    }[];
+    writers: {
+        name: string;
+        profile_path: string;
+        job: string;
+    }[];
+    cast: {
+        name: string;
+        profile_path: string;
+        role: string;
+    }[];
+}

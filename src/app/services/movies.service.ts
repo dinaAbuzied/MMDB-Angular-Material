@@ -40,8 +40,7 @@ export class MoviesService {
   getMovieCredits(id: number) {
     return this.http.get<MovieCreditsUnformatted>(`api/movieCredits/${id}`)
       .pipe(map(data => {
-        return data;
-        // return this.dt.formatMovieList(data);
+        return this.dt.formatMovieCredits(data);
       }));
   }
 

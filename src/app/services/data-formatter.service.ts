@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MovieListUnformatted, Movie,
         LocalMovie, MovieDetailsUnformatted,
-        MovieVideosUnformatted, MovieDetails } from '../interfaces/movies.interface';
+        MovieVideosUnformatted, MovieDetails,
+        MovieCreditsUnformatted, MovieCredits} from '../interfaces/movies.interface';
 import { LocalMoviesService } from './local-movies.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -11,11 +12,11 @@ import { AuthenticationService } from './authentication.service';
 export class DataFormatterService {
   largePoster = 'https://image.tmdb.org/t/p/w342/';
   detailsPoster = 'https://image.tmdb.org/t/p/w154/';
+  profilePoster = 'https://image.tmdb.org/t/p/w92';
 
   constructor(private lm: LocalMoviesService,
               private auth: AuthenticationService) { }
 
-  // TODO: sort sliced list by data
   formatMovieList(list: MovieListUnformatted): Movie[] {
     this.lm.setLocalMovies(this.auth.currentUser);
     const localMovies: LocalMovie[] = this.lm.localMovies;
@@ -54,11 +55,36 @@ export class DataFormatterService {
       runtime: `${hrs}h ${mins}min`,
       production_countries: details.production_countries,
       imdb_id: details.imdb_id,
-      poster: this.detailsPoster + details.poster_path,
+      poster: details.poster_path ? this.detailsPoster + details.poster_path : details.poster_path,
       overview: details.overview,
       genres: details.genres.map(genre => genre.name),
       trailer: videos.results && videos.results.length > 0 ? videos.results[0].key : false,
-      lists: moviesArr.length > 0 ? moviesArr[0].lists : []
+      lists: moviesArr.length > 0 ? [...moviesArr[0].lists] : []
+    };
+  }
+
+  formatMovieCredits(credits: MovieCreditsUnformatted): MovieCredits {
+    return {
+      directors: credits.crew.filter(person => person.job === 'Director').map(person => {
+        return {
+          name: person.name,
+          profile_path: person.profile_path ? this.profilePoster + person.profile_path : person.profile_path
+        };
+      }),
+      writers: credits.crew.filter(person => person.department === 'Writing').map(person => {
+        return {
+          name: person.name,
+          profile_path: person.profile_path ? this.profilePoster + person.profile_path : person.profile_path,
+          job: person.job
+        };
+      }),
+      cast: credits.cast.slice(0, 6).map(person => {
+        return {
+          name: person.name,
+          profile_path: person.profile_path ? this.profilePoster + person.profile_path : person.profile_path,
+          role: person.character
+        };
+      })
     };
   }
 }
