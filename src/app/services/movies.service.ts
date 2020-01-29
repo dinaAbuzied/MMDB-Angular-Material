@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { MovieListUnformatted, MovieDetailsUnformatted,
-        MovieVideosUnformatted, MovieCreditsUnformatted } from '../interfaces/movies.interface';
+import { map, defaultIfEmpty } from 'rxjs/operators';
+import {
+  MovieListUnformatted, MovieDetailsUnformatted,
+  MovieVideosUnformatted, MovieCreditsUnformatted, LocalMovie
+} from '../interfaces/movies.interface';
 import { DataFormatterService } from './data-formatter.service';
 import { forkJoin } from 'rxjs';
+import { LocalMoviesService } from './local-movies.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
-  constructor(private http: HttpClient, private dt: DataFormatterService) { }
+  constructor(private http: HttpClient,
+              private dt: DataFormatterService,
+              private lm: LocalMoviesService,
+              private auth: AuthenticationService) { }
 
   // TODO: add error handling function
   getNowPlaying() {
@@ -42,6 +49,16 @@ export class MoviesService {
       .pipe(map(data => {
         return this.dt.formatMovieCredits(data);
       }));
+  }
+
+  getListDetails(list: string) {
+    this.lm.setLocalMovies(this.auth.currentUser);
+    const localList: LocalMovie[] = this.lm.getUserList(list);
+    return forkJoin(
+      localList.map(movie => this.http.get<MovieDetailsUnformatted>(`api/movieDetails/${movie.id}`))
+    ).pipe(map(data => {
+      return this.dt.formatMovieShortDetails(data);
+    }), defaultIfEmpty([]));
   }
 
 }

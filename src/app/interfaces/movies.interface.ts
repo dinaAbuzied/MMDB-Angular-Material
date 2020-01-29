@@ -135,6 +135,15 @@ export interface MovieDetails {
     lists: string[];
 }
 
+export interface MovieShortDetails {
+    id: number;
+    title: string;
+    year: number;
+    poster: string;
+    genres: string[];
+    lists: string[];
+}
+
 export interface ProductionCountries {
     'iso_3166_1': string;
     'name': string;

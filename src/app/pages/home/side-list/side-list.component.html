@@ -12,5 +12,6 @@
     <button class="movie-details-cont no-border no-padding" *ngFor="let movie of movieList" (click)="onSelectMovie(movie.id)">
         <app-movie-row [movie]="movie"></app-movie-row>
     </button>
+    <!-- TODO: loading while movieList undefiend -->
     <p no-margin *ngIf="movieList.length == 0">Add Movies to see here!</p>
 </main>

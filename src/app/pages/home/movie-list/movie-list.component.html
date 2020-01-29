@@ -9,6 +9,8 @@
     </button>
 </header>
 <!-- TO DO: add angular animation to expand this panel -->
+<!-- TODO: loading while currentMovieList undefiend -->
+<!-- TODO: No Availble Movies -->
 <main>
     <div class="movie-card" *ngFor="let movie of currentMovieList">
         <button class="poster-container no-border no-padding" (click)="onSelectMovie(movie.id)">

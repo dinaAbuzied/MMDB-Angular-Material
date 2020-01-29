@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MovieListUnformatted, Movie,
         LocalMovie, MovieDetailsUnformatted,
         MovieVideosUnformatted, MovieDetails,
-        MovieCreditsUnformatted, MovieCredits} from '../interfaces/movies.interface';
+        MovieCreditsUnformatted, MovieCredits, MovieShortDetails} from '../interfaces/movies.interface';
 import { LocalMoviesService } from './local-movies.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -32,7 +32,7 @@ export class DataFormatterService {
         poster: movie.poster_path ? this.largePoster + movie.poster_path : movie.poster_path,
         id: movie.id,
         title: movie.title,
-        lists: moviesArr.length > 0 ? moviesArr[0].lists : []
+        lists: moviesArr.length > 0 ? [...moviesArr[0].lists] : []
       };
     });
   }
@@ -86,5 +86,20 @@ export class DataFormatterService {
         };
       })
     };
+  }
+
+  formatMovieShortDetails(detailsList: MovieDetailsUnformatted[]): MovieShortDetails[] {
+    this.lm.setLocalMovies(this.auth.currentUser);
+    return detailsList.map(details => {
+      const moviesArr: LocalMovie[] = this.lm.localMovies.filter(lmovie => details.id === lmovie.id);
+      return {
+        id: details.id,
+        title: details.title,
+        year: new Date(details.release_date).getFullYear(),
+        poster: details.poster_path ? this.detailsPoster + details.poster_path : details.poster_path,
+        genres: details.genres.map(genre => genre.name),
+        lists: moviesArr.length > 0 ? [...moviesArr[0].lists] : []
+      };
+    });
   }
 }

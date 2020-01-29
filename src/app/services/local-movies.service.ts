@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
-import { LocalMovie, Movie, MovieDetails } from '../interfaces/movies.interface';
+import { LocalMovie, Movie, MovieShortDetails } from '../interfaces/movies.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class LocalMoviesService {
     }
   }
 
+  getUserList(list: string): LocalMovie[] {
+    return this.localMovies.filter(movie => movie.lists.includes(list));
+  }
+
   updateLocalMovies(movieID: number, list: string) {
     if (this.movies.filter(movie => movie.id === movieID).length > 0) {
       this.movies = this.updateMovies(this.movies, movieID, list);
@@ -38,7 +42,7 @@ export class LocalMoviesService {
     localStorage.setItem(this.userID, JSON.stringify(this.movies));
   }
 
-  updateMovies(moviesArr: Array<Movie | LocalMovie>, movieID: number, list: string): any {
+  updateMovies(moviesArr: Array<Movie | LocalMovie | MovieShortDetails>, movieID: number, list: string): any {
     return moviesArr.map(movie => {
       if (movie.id === movieID) {
         if (movie.lists.includes(list)) {
