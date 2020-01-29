@@ -29,6 +29,9 @@ export class SigninComponent implements OnInit {
   }
 
   onLogin(type: string) {
+    if (type === 'user' && !this.signInForm.valid) {
+      return;
+    }
     const user: User = {
       type,
       name: type === 'user' ? this.name.value : 'Guest',
