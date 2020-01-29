@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MoviesService } from '../../services/movies.service';
+import { MovieShortDetails } from '../../interfaces/movies.interface';
 
 @Component({
   selector: 'app-header-search-bar',
@@ -8,47 +10,16 @@ import { FormControl } from '@angular/forms';
 })
 export class HeaderSearchBarComponent implements OnInit {
   @Output() selectMovie: EventEmitter<number> = new EventEmitter();
+  searchForm = new FormGroup({
+    searchControl: new FormControl('', Validators.required)
+  });
 
-  searchPhrase = '';
-  searchControl = new FormControl();
-  searchResults: Array<{
-    id: number,
-    title: string,
-    year: number,
-    poster?: string,
-    genres: string[]
-  }> = [{
-    id: 1,
-    title: 'Mission: Impossible - Fallout',
-    year: 2018,
-    poster: 'https://image.tmdb.org/t/p/w154/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg',
-    genres: ['Action', 'Adventure']
-  }, {
-    id: 1,
-    title: 'Mission: Impossible',
-    year: 1996,
-    poster: 'https://image.tmdb.org/t/p/w154/1PVKS17pIBFsIhgFws2uagPDNLW.jpg',
-    genres: ['Action', 'Adventure', 'Thriller']
-  }, {
-    id: 1,
-    title: 'Mission: Impossible - Ghost Protocol',
-    year: 2011,
-    poster: 'https://image.tmdb.org/t/p/w154/s58mMsgIVOFfoXPtwPWJ3hDYpXf.jpg',
-    genres: ['Action', 'Adventure', 'Thriller']
-  }, {
-    id: 1,
-    title: 'Mission: Impossible - Rogue Nation',
-    year: 2015,
-    poster: 'https://image.tmdb.org/t/p/w154/z2sJd1OvAGZLxgjBdSnQoLCfn3M.jpg',
-    genres: ['Action', 'Adventure']
-  }, {
-    id: 1,
-    title: 'Mission: Impossible III',
-    year: 2006,
-    genres: ['Action', 'Adventure', 'Thriller']
-  }];
+  get searchControl() { return this.searchForm.get('searchControl'); }
 
-  constructor() { }
+  searchResults: Array<MovieShortDetails> = [];
+  showMore: boolean;
+
+  constructor(private movies: MoviesService) { }
 
   ngOnInit() {
   }
@@ -56,7 +27,25 @@ export class HeaderSearchBarComponent implements OnInit {
   onOptionSelected({ option }) {
     this.selectMovie.emit(option.value);
     setTimeout(() => {
-      this.searchPhrase = '';
+      this.searchControl.setValue('');
+      this.searchResults = [];
+      this.showMore = false;
     }, 0);
+  }
+
+  onSearch(str: string) {
+    if (str.length > 0) {
+      this.movies.getSerachResault(str).subscribe(data => {
+        this.showMore = data.length > 5;
+        this.searchResults = data.length > 5 ? data.slice(0, 5) : data;
+      });
+    } else {
+      this.searchResults = [];
+      this.showMore = false;
+    }
+  }
+
+  onSubmit() {
+
   }
 }

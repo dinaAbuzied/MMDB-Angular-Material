@@ -9,6 +9,7 @@
         .mat-autocomplete-trigger {
             padding: 11px 12px;
             color: var(--primary-color);
+            caret-color: var(--primary-color);
         }
         .mat-form-field-underline {
             display: none;
@@ -80,6 +81,10 @@
             background-color: var(--color2);
             @include font-setting(0.875em, var(--color4));
             text-decoration: none;
+            .mat-button-wrapper {
+                width: 100%;
+                text-align: left;
+            }
             .mat-icon {
                 color: #000000;
                 opacity: 0.2;

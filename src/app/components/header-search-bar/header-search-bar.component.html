@@ -1,19 +1,19 @@
-<form class="search-form">
+<form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="search-form-field" [floatLabel]="'never'">
-        <input [(ngModel)]="searchPhrase" type="text" placeholder="Search" aria-label="Search" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+        <input (ngModelChange)="onSearch($event)" type="text" placeholder="Search" aria-label="Search" matInput formControlName="searchControl" [matAutocomplete]="auto">
         <mat-autocomplete class="movie-results" #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
             <mat-option [value]="movie.id" *ngFor="let movie of searchResults" [value]="option">
                 <app-movie-row [movie]="movie"></app-movie-row>
             </mat-option>
-            <mat-option [value]="'see more'">
-                <a mat-button href="/home" class="more-results-btn">
-                see more results for "mission:"
+            <mat-option *ngIf="showMore" [value]="'see more'">
+                <button type="submit" mat-button class="more-results-btn">
+                see more results for "{{searchControl.value}}":
                 <mat-icon>double_arrow</mat-icon>
-                </a>
+                </button>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <button class="search-btn pull-right" mat-icon-button aria-label="Search">
+    <button type="submit" [disabled]="!searchForm.valid" class="search-btn pull-right" mat-flat-button aria-label="Search">
             <mat-icon>search</mat-icon>
     </button>
 </form>
