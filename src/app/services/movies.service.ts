@@ -61,4 +61,13 @@ export class MoviesService {
     }), defaultIfEmpty([]));
   }
 
+  getSerachResault(phrase: string) {
+    return forkJoin([
+      this.http.get<MovieListUnformatted>('api/nowPlaying'),
+      this.http.get<MovieListUnformatted>('api/upComing')
+    ]).pipe(map(data => {
+      return this.dt.formatSearchResualts([...data[0].results.filter(movie => movie.title.toLowerCase().includes(phrase.toLowerCase())),
+      ...data[1].results.filter(movie => movie.title.toLowerCase().includes(phrase.toLowerCase()))]);
+    }), defaultIfEmpty([]));
+  }
 }

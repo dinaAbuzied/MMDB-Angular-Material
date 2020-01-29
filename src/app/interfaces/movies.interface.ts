@@ -1,27 +1,29 @@
 export interface MovieListUnformatted {
-    'results': {
-        'popularity': number;
-        'vote_count': number;
-        'video': boolean;
-        'poster_path': string;
-        'id': number;
-        'adult': boolean;
-        'backdrop_path': string;
-        'original_language': string;
-        'original_title': string;
-        'genre_ids': number[];
-        'title': string;
-        'vote_average': number;
-        'overview': string;
-        'release_date': string;
-    }[];
+    'results': MovieShortDetailsUnformatted[];
     'page': number;
     'total_results': number;
-    'dates': {
+    'dates'?: {
         'maximum': string;
         'minimum': string;
     };
     'total_pages': number;
+}
+
+export interface MovieShortDetailsUnformatted {
+    'popularity': number;
+    'vote_count': number;
+    'video': boolean;
+    'poster_path': string;
+    'id': number;
+    'adult': boolean;
+    'backdrop_path': string;
+    'original_language': string;
+    'original_title': string;
+    'genre_ids': number[];
+    'title': string;
+    'vote_average': number;
+    'overview': string;
+    'release_date': string;
 }
 
 export interface MovieDetailsUnformatted {
@@ -141,7 +143,7 @@ export interface MovieShortDetails {
     year: number;
     poster: string;
     genres: string[];
-    lists: string[];
+    lists?: string[];
 }
 
 export interface ProductionCountries {
