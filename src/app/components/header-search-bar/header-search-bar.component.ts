@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MoviesService } from '../../services/movies.service';
 import { MovieShortDetails } from '../../interfaces/movies.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-search-bar',
@@ -19,7 +20,7 @@ export class HeaderSearchBarComponent implements OnInit {
   searchResults: Array<MovieShortDetails> = [];
   showMore: boolean;
 
-  constructor(private movies: MoviesService) { }
+  constructor(private movies: MoviesService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -46,6 +47,6 @@ export class HeaderSearchBarComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.router.navigate(['/search'], { queryParams: { query: this.searchControl.value } });
   }
 }

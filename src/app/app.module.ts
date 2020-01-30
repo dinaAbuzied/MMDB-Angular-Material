@@ -7,12 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
-import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
