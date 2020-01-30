@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, defaultIfEmpty } from 'rxjs/operators';
 import {
   MovieListUnformatted, MovieDetailsUnformatted,
-  MovieVideosUnformatted, MovieCreditsUnformatted, LocalMovie
+  MovieVideosUnformatted, MovieCreditsUnformatted, LocalMovie, Genre
 } from '../interfaces/movies.interface';
 import { DataFormatterService } from './data-formatter.service';
 import { forkJoin } from 'rxjs';
@@ -14,13 +14,24 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class MoviesService {
+  private currentGenres: Genre[];
+
+  public get genres(): Genre[] {
+    return this.currentGenres;
+  }
 
   constructor(private http: HttpClient,
               private dt: DataFormatterService,
               private lm: LocalMoviesService,
-              private auth: AuthenticationService) { }
+              private auth: AuthenticationService) {
+                this.getGenres().subscribe(data => this.currentGenres = data.genres);
+              }
 
   // TODO: add error handling function
+  getGenres() {
+    return this.http.get<{genres: Genre[]}>('api/genres');
+  }
+
   getNowPlaying() {
     return this.http.get<MovieListUnformatted>('api/nowPlaying')
       .pipe(map(data => {
@@ -67,7 +78,8 @@ export class MoviesService {
       this.http.get<MovieListUnformatted>('api/upComing')
     ]).pipe(map(data => {
       return this.dt.formatSearchResualts([...data[0].results.filter(movie => movie.title.toLowerCase().includes(phrase.toLowerCase())),
-      ...data[1].results.filter(movie => movie.title.toLowerCase().includes(phrase.toLowerCase()))]);
+      ...data[1].results.filter(movie => movie.title.toLowerCase().includes(phrase.toLowerCase()))],
+    this.currentGenres);
     }), defaultIfEmpty([]));
   }
 }

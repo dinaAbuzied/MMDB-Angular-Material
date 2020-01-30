@@ -36,10 +36,7 @@ export interface MovieDetailsUnformatted {
         'backdrop_path': string;
     };
     'budget': number;
-    'genres': {
-        'id': number;
-        'name': string;
-    }[];
+    'genres': Genre[];
     'homepage': string;
     'id': number;
     'imdb_id': string;
@@ -166,4 +163,9 @@ export interface MovieCredits {
         profile_path: string;
         role: string;
     }[];
+}
+
+export interface Genre {
+    id: number;
+    name: string;
 }
