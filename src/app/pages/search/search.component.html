@@ -4,4 +4,18 @@
 <main class="container">
     <!-- TODO: add H1 tag -->
     <!-- TODO: add loading screen -->
+    <section class="results-section">
+        <header>Displaying {{searchResults.length}} results for "{{searchQuery}}"</header>
+        <div class="result-cont">
+            <button class="movie-details-cont no-border no-padding" *ngFor="let movie of searchResults" (click)="showMovieDetails(movie.id)">
+                <app-movie-row [movie]="movie"></app-movie-row>
+            </button>
+        </div>
+    </section>
+    <!-- <section class="filter-section">
+        <header>Filter Search Results</header>
+        <div class="filter-cont">
+
+        </div>
+    </section> -->
 </main>

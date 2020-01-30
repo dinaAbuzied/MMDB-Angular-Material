@@ -1,0 +1,36 @@
+@import '../../../common_styles/mixins.scss';
+.container {
+    display: flex;
+    overflow-y: auto;
+}
+
+.results-section {
+    // flex: 9;
+    // width: 75%;
+    padding: 15px;
+    background-color: var(--color2);
+    header {
+        @include font-setting(1.125em, var(--primary-color));
+        margin-bottom: 15px;
+    }
+}
+
+.movie-details-cont {
+    --details-padding-right: 5px;
+    --details-padding-left: 5px;
+    --poster-margin-right: 5px;
+    --movie-title-weight: normal;
+    margin: 5px 0;
+    width: 100%;
+    font-size: 1em;
+    &:nth-child(2n+1) {
+        --details-background: var(--color4);
+        --details-color: var(--primary-color-opacity)
+    }
+}
+
+.filter-section {
+    flex: 3;
+    width: 25%;
+    padding-left: 8px;
+}

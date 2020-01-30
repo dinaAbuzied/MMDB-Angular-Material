@@ -13,6 +13,7 @@ import { LocalMoviesService } from '../../services/local-movies.service';
 })
 export class SearchComponent implements OnInit {
   searchResults: Array<MovieShortDetails> = [];
+  searchQuery: string;
 
   constructor(public detailsDialog: MatDialog,
               private lm: LocalMoviesService,
@@ -20,9 +21,9 @@ export class SearchComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const query: string = this.route.snapshot.queryParams.query;
-    if (query && query.length !== 0) {
-      this.movies.getSearchResault(query, true).subscribe(data => {
+    this.searchQuery = this.route.snapshot.queryParams.query;
+    if (this.searchQuery && this.searchQuery.length !== 0) {
+      this.movies.getSearchResault(this.searchQuery, true).subscribe(data => {
         this.searchResults = data;
         console.log(this.searchResults);
       });
