@@ -36,7 +36,7 @@ export class HeaderSearchBarComponent implements OnInit {
 
   onSearch(str: string) {
     if (str.length > 0) {
-      this.movies.getSerachResault(str).subscribe(data => {
+      this.movies.getSearchResault(str).subscribe(data => {
         this.showMore = data.length > 5;
         this.searchResults = data.length > 5 ? data.slice(0, 5) : data;
       });

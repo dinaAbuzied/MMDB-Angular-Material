@@ -105,14 +105,22 @@ export class DataFormatterService {
     });
   }
 
-  formatSearchResualts(detailsList: MovieShortDetailsUnformatted[], genres: Genre[]): MovieShortDetails[] {
+  formatSearchResualts(detailsList: MovieShortDetailsUnformatted[], genres: Genre[], addLists: boolean = false): MovieShortDetails[] {
+    if (addLists) {
+      this.lm.setLocalMovies(this.auth.currentUser);
+    }
     return detailsList.map(details => {
+      let moviesArr: LocalMovie[] = [];
+      if (addLists) {
+        moviesArr = this.lm.localMovies.filter(lmovie => details.id === lmovie.id);
+      }
       return {
         id: details.id,
         title: details.title,
         year: new Date(details.release_date).getFullYear(),
         poster: details.poster_path ? this.detailsPoster + details.poster_path : details.poster_path,
-        genres: details.genre_ids.map(genre => genres.filter(i => genre === i.id)[0].name)
+        genres: details.genre_ids.map(genre => genres.filter(i => genre === i.id)[0].name),
+        lists: moviesArr.length > 0 ? [...moviesArr[0].lists] : []
       };
     });
   }
