@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MovieShortDetails } from '../../interfaces/movies.interface';
+import { MoviesService } from '../../services/movies.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
+import { LocalMoviesService } from '../../services/local-movies.service';
 
 @Component({
   selector: 'app-search',
@@ -6,10 +12,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  searchResults: Array<MovieShortDetails> = [];
 
-  constructor() { }
+  constructor(public detailsDialog: MatDialog,
+              private lm: LocalMoviesService,
+              private movies: MoviesService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const query: string = this.route.snapshot.queryParams.query;
+    if (query && query.length !== 0) {
+      this.movies.getSearchResault(query, true).subscribe(data => {
+        this.searchResults = data;
+        console.log(this.searchResults);
+      });
+    }
   }
 
+  updateMovieList({movieID, list}) {
+    this.lm.updateLocalMovies(movieID, list);
+    this.searchResults = this.lm.updateMovies(this.searchResults, movieID, list);
+  }
+
+  showMovieDetails(id: number) {
+    const dialogRef = this.detailsDialog.open(MovieDetailsComponent, {
+      data: { id },
+      panelClass: 'movie-details-dialog',
+      width: '600px'
+    });
+
+    dialogRef.componentInstance.updateList.subscribe(({movieID, list}) => {
+      this.updateMovieList({movieID, list});
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

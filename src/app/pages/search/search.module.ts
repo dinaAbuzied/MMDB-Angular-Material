@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchComponent } from './search.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { ComponentsModule } from '../../components/components.module';
+
 const routes: Routes = [{
   path: '',
   component: SearchComponent
@@ -13,7 +17,9 @@ const routes: Routes = [{
   exports: [RouterModule],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    ComponentsModule,
+    MatDialogModule
   ]
 })
 export class SearchModule { }
