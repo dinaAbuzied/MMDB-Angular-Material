@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SigninComponent implements OnInit {
   signInForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    key: new FormControl('',  [Validators.required, Validators.minLength(32), Validators.maxLength(32)]),
+    key: new FormControl('',  [Validators.required, Validators.minLength(8), Validators.maxLength(16)]),
   });
   returnUrl: string;
 

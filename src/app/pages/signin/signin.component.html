@@ -17,10 +17,10 @@
                 <mat-icon matPrefix>vpn_key</mat-icon>
                 <input type="password" matInput placeholder="API Key" aria-label="API Key" formControlName="key">
                 <mat-error *ngIf="key.errors && (key.errors.minlength || key.errors.maxlength)">
-                    API Key should contains 32 characters
+                    Password should contains 8 to 16 characters
                 </mat-error>
                 <mat-error *ngIf="key.errors && key.errors.required">
-                    API Key is <strong>required</strong>
+                    Password is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <button class="user-btn" type="submit" mat-flat-button>Sign In</button>
