@@ -40,6 +40,13 @@
             &::placeholder {
                 color: var(--color4);
             }
+            @include autofill {
+                -webkit-text-fill-color: var(--primary-color);
+                transition: background-color 5000s ease-in-out 0s;
+                -webkit-box-shadow: 0 0 0px 1000px var(--color2) inset;
+                border-bottom: 1px solid var(--color4);
+                border-top: 1px solid var(--color4);
+            }
         }
     }
 }

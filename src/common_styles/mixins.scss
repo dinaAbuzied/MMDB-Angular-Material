@@ -29,6 +29,15 @@
     }
 }
 
+@mixin autofill {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        @content;
+    }
+}
+
 // div {
 //     @include responsive-ratio(16,9);
 // }
