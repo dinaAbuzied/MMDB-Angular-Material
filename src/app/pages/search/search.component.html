@@ -12,10 +12,23 @@
             </button>
         </div>
     </section>
-    <!-- <section class="filter-section">
+    <section class="filter-section">
         <header>Filter Search Results</header>
         <div class="filter-cont">
-
+            <div class="release-year">
+                <mat-label>Release Year</mat-label>
+                <mat-form-field [floatLabel]="'never'">
+                    <input matInput placeholder="ex. 1990" aria-describedby="Starting Year">
+                </mat-form-field>
+                <span class="middle">to</span>
+                <mat-form-field [floatLabel]="'never'">
+                    <input matInput placeholder="ex. 1990" aria-describedby="Ending Year">
+                </mat-form-field>
+            </div>
+            <div class="genres">
+                <mat-label>Genre</mat-label>
+                <mat-checkbox *ngFor="let genre of genres">{{genre.name}}</mat-checkbox>
+            </div>
         </div>
-    </section> -->
+    </section>
 </main>

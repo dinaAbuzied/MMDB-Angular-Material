@@ -5,8 +5,8 @@
 }
 
 .results-section {
-    // flex: 9;
-    // width: 75%;
+    flex: 9;
+    width: 75%;
     padding: 15px;
     background-color: var(--color2);
     header {
@@ -33,4 +33,82 @@
     flex: 3;
     width: 25%;
     padding-left: 8px;
+    header {
+        @include font-setting(1.125em, var(--primary-color), 700);
+        padding: 13px;
+        background-color: var(--color3);
+    }
+}
+
+.filter-cont {
+    background-color: var(--color2);
+    padding: 15px;
+    mat-label {
+        @include font-setting(0.875em, var(--primary-color), 700);
+        margin-bottom: 5px;
+        flex-basis: 100%;
+    }
+    .release-year {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+        .middle {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include font-setting(0.875em, var(--color4));
+        }
+        mat-form-field {
+            width: 40%;
+            background-color: var(--color3);
+            border: 0.5px solid var(--color4);
+            border-radius: 4px;
+            input {
+                @include font-setting(0.875em, var(--primary-color));
+                caret-color: var(--primary-color);
+                padding: 6px 12px;
+                line-height: 1.42857143;
+                height: 34px;
+            }
+             ::ng-deep {
+                .mat-form-field-underline {
+                    display: none;
+                }
+                .mat-form-field-infix {
+                    border: none;
+                    padding: 0;
+                }
+                .mat-form-field-label {
+                    top: 1.3em;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    color: var(--color4);
+                }
+                .mat-form-field-wrapper {
+                    padding: 0;
+                }
+            }
+        }
+    }
+    .genres {
+        display: flex;
+        flex-wrap: wrap;
+        .mat-checkbox {
+            width: 50%;
+            @include font-setting(0.875em, var(--primary-color));
+        }
+         ::ng-deep {
+            .mat-checkbox-frame {
+                border-width: 1px;
+                border-color: var(--color4);
+            }
+            .mat-checkbox-background {
+                background-color: var(--color1);
+            }
+            .mat-ripple {
+                display: none;
+            }
+        }
+    }
 }

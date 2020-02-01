@@ -6,7 +6,7 @@ import {
   MovieVideosUnformatted, MovieCreditsUnformatted, LocalMovie, Genre
 } from '../interfaces/movies.interface';
 import { DataFormatterService } from './data-formatter.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { LocalMoviesService } from './local-movies.service';
 import { AuthenticationService } from './authentication.service';
 

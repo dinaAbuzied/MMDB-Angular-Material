@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieShortDetails } from '../../interfaces/movies.interface';
+import { MovieShortDetails, Genre } from '../../interfaces/movies.interface';
 import { MoviesService } from '../../services/movies.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
@@ -14,6 +14,7 @@ import { LocalMoviesService } from '../../services/local-movies.service';
 export class SearchComponent implements OnInit {
   searchResults: Array<MovieShortDetails> = [];
   searchQuery: string;
+  genres: Genre[] = [];
 
   constructor(public detailsDialog: MatDialog,
               private lm: LocalMoviesService,
@@ -27,6 +28,11 @@ export class SearchComponent implements OnInit {
         this.searchResults = data;
         console.log(this.searchResults);
       });
+    }
+    if (this.movies.genres) {
+      this.genres = this.movies.genres;
+    } else {
+      this.movies.getGenres().subscribe(data => this.genres = data.genres);
     }
   }
 
