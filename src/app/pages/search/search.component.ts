@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   searchResults: Array<MovieShortDetails> = [];
   searchQuery: string;
   genres: Genre[] = [];
+  selectedGenres: string[] = [];
 
   constructor(public detailsDialog: MatDialog,
               private lm: LocalMoviesService,
@@ -39,6 +40,14 @@ export class SearchComponent implements OnInit {
   updateMovieList({movieID, list}) {
     this.lm.updateLocalMovies(movieID, list);
     this.searchResults = this.lm.updateMovies(this.searchResults, movieID, list);
+  }
+
+  toggleGenres(genre: string) {
+    if (this.selectedGenres.includes(genre)) {
+      this.selectedGenres = this.selectedGenres.filter(item => item !== genre);
+    } else {
+      this.selectedGenres = [...this.selectedGenres, genre];
+    }
   }
 
   showMovieDetails(id: number) {

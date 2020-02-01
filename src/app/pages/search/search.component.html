@@ -5,9 +5,10 @@
     <!-- TODO: add H1 tag -->
     <!-- TODO: add loading screen -->
     <section class="results-section">
+        <!-- TODO: Fix search result total number on using filter -->
         <header>Displaying {{searchResults.length}} results for "{{searchQuery}}"</header>
         <div class="result-cont">
-            <button class="movie-details-cont no-border no-padding" *ngFor="let movie of searchResults" (click)="showMovieDetails(movie.id)">
+            <button class="movie-details-cont no-border no-padding" *ngFor="let movie of searchResults | moviesFilter: startYear:endYear:selectedGenres" (click)="showMovieDetails(movie.id)">
                 <app-movie-row [movie]="movie"></app-movie-row>
             </button>
         </div>
@@ -18,16 +19,16 @@
             <div class="release-year">
                 <mat-label>Release Year</mat-label>
                 <mat-form-field [floatLabel]="'never'">
-                    <input matInput placeholder="ex. 1990" aria-describedby="Starting Year">
+                    <input [(ngModel)]="startYear" matInput placeholder="ex. 1990" aria-describedby="Starting Year">
                 </mat-form-field>
                 <span class="middle">to</span>
                 <mat-form-field [floatLabel]="'never'">
-                    <input matInput placeholder="ex. 1990" aria-describedby="Ending Year">
+                    <input [(ngModel)]="endYear" matInput placeholder="ex. 1990" aria-describedby="Ending Year">
                 </mat-form-field>
             </div>
             <div class="genres">
                 <mat-label>Genre</mat-label>
-                <mat-checkbox *ngFor="let genre of genres">{{genre.name}}</mat-checkbox>
+                <mat-checkbox (click)="toggleGenres(genre.name)" *ngFor="let genre of genres">{{genre.name}}</mat-checkbox>
             </div>
         </div>
     </section>
