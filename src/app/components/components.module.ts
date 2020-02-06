@@ -16,8 +16,7 @@ import { MovieRowComponent } from './movie-row/movie-row.component';
 import { MoviePosterComponent } from './movie-poster/movie-poster.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDividerModule,
     MatButtonModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [MovieDetailsComponent]
 })

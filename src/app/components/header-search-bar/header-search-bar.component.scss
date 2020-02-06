@@ -35,6 +35,12 @@
     width: 30vw;
 }
 
+.mat-spinner {
+    position: absolute;
+    top: 25%;
+    right: 5px;
+}
+
 .search-btn {
     border: 0.5px solid var(--color4);
     border-radius: 0 4px 4px 0;
