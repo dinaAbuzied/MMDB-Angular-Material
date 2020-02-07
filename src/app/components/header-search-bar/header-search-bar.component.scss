@@ -39,6 +39,11 @@
     position: absolute;
     top: 25%;
     right: 5px;
+     ::ng-deep {
+        circle {
+            stroke: var(--color4);
+        }
+    }
 }
 
 .search-btn {
