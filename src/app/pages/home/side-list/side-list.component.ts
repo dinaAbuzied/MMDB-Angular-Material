@@ -8,10 +8,9 @@ import { MovieShortDetails } from '../../../interfaces/movies.interface';
 })
 export class SideListComponent implements OnInit {
   @Output() selectMovie: EventEmitter<number> = new EventEmitter();
-
   @Input() movieList: MovieShortDetails[] = [];
-
   @Input() header;
+  @Input() state = 'loading';
 
   constructor() { }
 

@@ -3,24 +3,25 @@
         <mat-icon>movie</mat-icon>
         <label>{{title}}</label>
     </div>
-    <button mat-button (click)="toggleExpandedList()" [ngClass]="{'expanded': listExpanded}">
+    <button *ngIf="totalList.length > 5" mat-button (click)="toggleExpandedList()" [ngClass]="{'expanded': listExpanded}">
         more
         <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
 </header>
-<!-- TO DO: add angular animation to expand this panel -->
-<!-- TODO: loading while currentMovieList undefiend -->
-<!-- TODO: No Availble Movies -->
+<!-- TODO: add angular animation to expand this panel -->
 <main>
-    <div class="movie-card" *ngFor="let movie of currentMovieList">
-        <button class="poster-container no-border no-padding" (click)="onSelectMovie(movie.id)">
-                <app-movie-poster [title]="movie.title" [posterURL]="movie.poster || false" [size]="'large'"></app-movie-poster>
-        </button>
-        <div class="overlay">
-            <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type, movie.id)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(movie, list.type)}">
-                <span class="top-border"></span>
-                <mat-icon>{{list.icon}}</mat-icon>
-            </button>
+    <ng-container *ngIf="state == 'complete'">
+        <div class="movie-card" *ngFor="let movie of currentMovieList">
+            <button class="poster-container no-border no-padding" (click)="onSelectMovie(movie.id)">
+                            <app-movie-poster [title]="movie.title" [posterURL]="movie.poster || false" [size]="'large'"></app-movie-poster>
+                    </button>
+            <div class="overlay">
+                <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type, movie.id)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(movie, list.type)}">
+                            <span class="top-border"></span>
+                            <mat-icon>{{list.icon}}</mat-icon>
+                        </button>
+            </div>
         </div>
-    </div>
+        <p no-margin *ngIf="currentMovieList.length == 0">No Available Movies!</p>
+    </ng-container>
 </main>

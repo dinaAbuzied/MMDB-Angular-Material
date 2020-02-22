@@ -32,6 +32,14 @@ main {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
+    >p {
+        @include font-setting(2em, #000000, false, false, center);
+        width: 100%;
+        text-shadow: 0px 1px 0px #ffffff;
+        opacity: 0.2;
+        padding: 65px 40px;
+        cursor: default;
+    }
 }
 
 .movie-card {

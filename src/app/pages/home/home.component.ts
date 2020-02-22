@@ -12,10 +12,14 @@ import { LocalMoviesService } from '../../services/local-movies.service';
 })
 export class HomeComponent implements OnInit {
   nowPlaying: Movie[];
+  nowPlayingState = 'loading';
   comingSoon: Movie[];
+  comingSoonState = 'loading';
   watchLaterData: MovieShortDetails[] = [];
+  watchLaterState = 'loading';
   watchLaterHeader;
   wishListData: MovieShortDetails[] = [];
+  wishListState = 'loading';
   wishListHeader;
 
   constructor(public detailsDialog: MatDialog,
@@ -36,15 +40,19 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.movies.getNowPlaying().subscribe(data => {
       this.nowPlaying = data;
+      this.nowPlayingState = 'complete';
     });
     this.movies.getUpComing().subscribe(data => {
       this.comingSoon = data;
+      this.comingSoonState = 'complete';
     });
     this.movies.getListDetails('later').subscribe(data => {
       this.watchLaterData = data.length > 5 ? data.reverse().slice(0, 5) : data.reverse();
+      this.watchLaterState = 'complete';
     });
     this.movies.getListDetails('wish').subscribe(data => {
       this.wishListData = data.length > 5 ? data.reverse().slice(0, 5) : data.reverse();
+      this.wishListState = 'complete';
     });
   }
 

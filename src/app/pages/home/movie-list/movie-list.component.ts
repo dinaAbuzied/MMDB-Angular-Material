@@ -8,17 +8,27 @@ import { Movie } from '../../../interfaces/movies.interface';
 })
 export class MovieListComponent implements OnInit {
   @Output() selectMovie: EventEmitter<number> = new EventEmitter();
-  @Output() updateList: EventEmitter<{movieID: number, list: string}> = new EventEmitter();
+  @Output() updateList: EventEmitter<{ movieID: number, list: string }> = new EventEmitter();
   @Input() title: string;
-  @Input() movieList: Movie[] = [];
-  currentMovieList: Movie[];
+  @Input() state = 'loading';
+  private totalList: Movie[] = [];
+
+  @Input('movieList')
+  public set movieList(v: Movie[]) {
+    if (v) {
+      this.totalList = v;
+      this.currentMovieList = this.listExpanded ? [...this.totalList] : this.totalList.slice(0, 5);
+    }
+  }
+
+  currentMovieList: Movie[] = [];
   listsConfig;
   listExpanded: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    this.currentMovieList = this.movieList.slice(0, 5);
+    // this.currentMovieList = this.movieList.slice(0, 5);
     this.listsConfig = [{
       type: 'fav',
       icon: 'favorite',
@@ -41,11 +51,11 @@ export class MovieListComponent implements OnInit {
   toggleExpandedList() {
     this.listExpanded = !this.listExpanded;
 
-    this.currentMovieList = this.listExpanded ? [...this.movieList] : this.movieList.slice(0, 5);
+    this.currentMovieList = this.listExpanded ? [...this.totalList] : this.totalList.slice(0, 5);
   }
 
   toggleUserList(list: string, movieID: number) {
-    this.updateList.emit({movieID, list});
+    this.updateList.emit({ movieID, list });
   }
 
   isActive(movie: Movie, list: string) {
