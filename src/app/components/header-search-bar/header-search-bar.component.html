@@ -1,6 +1,6 @@
 <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="search-form-field" [floatLabel]="'never'">
-        <input (ngModelChange)="onSearch($event)" type="text" placeholder="Search" aria-label="Search" matInput formControlName="searchControl" [matAutocomplete]="auto">
+        <input (focusout)="onFocusOut()" (ngModelChange)="onSearch($event)" type="text" placeholder="Search" aria-label="Search" matInput formControlName="searchControl" [matAutocomplete]="auto">
         <mat-spinner *ngIf="isSearching" [diameter]="20"></mat-spinner>
         <mat-autocomplete class="movie-results" #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
             <mat-option [value]="movie.id" *ngFor="let movie of searchResults" [value]="option">

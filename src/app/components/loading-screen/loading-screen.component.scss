@@ -1,0 +1,15 @@
+.cdk-overlay-dark-backdrop {
+    width: 100vw;
+    height: 100vh;
+}
+
+.mat-spinner {
+    position: absolute;
+    top: calc(50vh - 50px);
+    left: calc(50vw - 50px);
+     ::ng-deep {
+        circle {
+            stroke: var(--color4);
+        }
+    }
+}
