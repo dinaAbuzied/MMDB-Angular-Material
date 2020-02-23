@@ -2,6 +2,8 @@ import { Component, OnInit, Inject, AfterViewInit, Output, EventEmitter } from '
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MoviesService } from '../../services/movies.service';
 import { MovieDetails, MovieCredits } from '../../interfaces/movies.interface';
+import { Subscription } from 'rxjs';
+import { LoadingScreenService } from '../../services/loading-screen.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,19 +14,26 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
   @Output() updateList: EventEmitter<{movieID: number, list: string}> = new EventEmitter();
   listsConfig = [];
   movie: MovieDetails;
+  movieLoading = true;
   credit: MovieCredits;
+  creditsSub: Subscription;
+  creaditsLoading: boolean;
   imdbLogo = 'http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png';
 
   constructor(public dialogRef: MatDialogRef<MovieDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private ms: MoviesService) { }
+              private ms: MoviesService, private ls: LoadingScreenService) {
+                ls.disableLoadingScreen = true;
+              }
 
   ngOnInit() {
     console.log(this.data);
   }
 
   ngAfterViewInit() {
+    const movieDetailsSub =
     this.ms.getMovieDetails(this.data.id).subscribe(data => {
+      this.movieLoading = false;
       console.log(data);
       this.movie = data;
       this.callIMDB(document, 'script', 'imdb-rating-api');
@@ -46,12 +55,23 @@ export class MovieDetailsComponent implements OnInit, AfterViewInit {
         title: 'Own it'
       }];
     });
+    const dialogCloseSub =
+    this.dialogRef.beforeClosed().subscribe(() => {
+      movieDetailsSub.unsubscribe();
+      dialogCloseSub.unsubscribe();
+      if (this.creditsSub) {
+        this.creditsSub.unsubscribe();
+      }
+      this.ls.disableLoadingScreen = false;
+    });
   }
 
   showCredits() {
     if (this.credit === undefined) {
-      this.ms.getMovieCredits(this.data.id).subscribe(data => {
+      this.creaditsLoading = true;
+      this.creditsSub = this.ms.getMovieCredits(this.data.id).subscribe(data => {
         this.credit = data;
+        this.creaditsLoading = false;
       });
     }
   }

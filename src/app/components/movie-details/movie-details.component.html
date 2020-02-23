@@ -1,87 +1,94 @@
-<div class="movie-details-container" *ngIf="movie">
-    <!-- TODO: add loading -->
+<div class="movie-details-container">
+    <!-- TODO: add error msg -->
     <header>
         <button mat-icon-button mat-dialog-close cdkFocusInitial>
                 <mat-icon>close</mat-icon>
         </button>
     </header>
-    <main class="movie-details">
-        <div class="flex-3 left-side">
-            <app-movie-poster [size]="'large'" [posterURL]="movie.poster || false"></app-movie-poster>
-            <div class="imdb-cont" *ngIf="movie.imdb_id">
-                <span class="imdbRatingPlugin" data-style="p1" attr.data-title="{{movie.imdb_id}}">
+    <div *ngIf="movieLoading" class="movie-details-loading">
+        <mat-spinner></mat-spinner>
+    </div>
+    <ng-container *ngIf="movie">
+        <main class="movie-details">
+            <div class="flex-3 left-side">
+                <app-movie-poster [size]="'large'" [posterURL]="movie.poster || false"></app-movie-poster>
+                <div class="imdb-cont" *ngIf="movie.imdb_id">
+                    <span class="imdbRatingPlugin" data-style="p1" attr.data-title="{{movie.imdb_id}}">
                     <a href="http://www.imdb.com/title/{{movie.imdb_id}}/?ref_=plg_rt_1">
                         <img src="{{imdbLogo}}" alt="'{{movie.title}}' on IMDb" />
                     </a>
                 </span>
+                </div>
             </div>
-        </div>
-        <div class="flex-9 right-side">
-            <h2 class="movie-title no-margin">{{movie.title}} ({{movie.release_date.year}})</h2>
-            <div class="side-details">
-                <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.runtime}} | {{movie.release_date.day}} {{movie.release_date.month}} {{movie.release_date.year}}
-                <a href="https://www.youtube.com/watch?v={{movie.trailer}}" target="_blank" *ngIf="movie.trailer" class="pull-right utube" title="watch trailer">
-                    <img src="../../../assets/img/YouTube-icon-full_color.png" alt="watch trailer">
-                </a>
+            <div class="flex-9 right-side">
+                <h2 class="movie-title no-margin">{{movie.title}} ({{movie.release_date.year}})</h2>
+                <div class="side-details">
+                    <span *ngFor="let country of movie.production_countries" title="{{country.name}}" class="flag-icon flag-icon-{{country.iso_3166_1 | lowercase}}"></span> | {{movie.runtime}} | {{movie.release_date.day}} {{movie.release_date.month}}
+                    {{movie.release_date.year}}
+                    <a href="https://www.youtube.com/watch?v={{movie.trailer}}" target="_blank" *ngIf="movie.trailer" class="pull-right utube" title="watch trailer">
+                        <img src="../../../assets/img/YouTube-icon-full_color.png" alt="watch trailer">
+                    </a>
+                </div>
+                <p class="movie-plot">{{movie.overview}}</p>
             </div>
-            <p class="movie-plot">{{movie.overview}}</p>
-        </div>
-        <mat-expansion-panel (opened)="showCredits()">
-            <mat-expansion-panel-header [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
-                cast and crew
-            </mat-expansion-panel-header>
-            <div class="panel-body" *ngIf="credit">
-                <section>
-                    <h3>Directed By</h3>
-                    <div class="credit-cont">
-                        <div *ngFor="let director of credit.directors" class="crew-card">
-                            <div class="crew-poster">
-                                <app-movie-poster [posterURL]="director.profile_path || false"></app-movie-poster>
-                            </div>
-                            <div class="crew-details">
-                                <label class="name">{{director.name}}</label>
+            <mat-expansion-panel (opened)="showCredits()">
+                <mat-expansion-panel-header [ngClass]="{'disabled': creaditsLoading}" [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
+                    cast and crew
+                    <mat-spinner *ngIf="creaditsLoading" [diameter]="15"></mat-spinner>
+                </mat-expansion-panel-header>
+                <div class="panel-body" *ngIf="credit">
+                    <section>
+                        <h3>Directed By</h3>
+                        <div class="credit-cont">
+                            <div *ngFor="let director of credit.directors" class="crew-card">
+                                <div class="crew-poster">
+                                    <app-movie-poster [posterURL]="director.profile_path || false"></app-movie-poster>
+                                </div>
+                                <div class="crew-details">
+                                    <label class="name">{{director.name}}</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section>
-                    <h3>Written By</h3>
-                    <div class="credit-cont">
-                        <div *ngFor="let writer of credit.writers" class="crew-card">
-                            <div class="crew-poster">
-                                <app-movie-poster [posterURL]="writer.profile_path || false"></app-movie-poster>
-                            </div>
-                            <div class="crew-details">
-                                <label class="name">{{writer.name}}</label>
-                                <label class="job">({{writer.job}})</label>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <h3>Cast</h3>
-                    <div class="credit-cont">
-                        <div *ngFor="let actor of credit.cast" class="crew-card">
-                            <div class="crew-poster">
-                                <app-movie-poster [posterURL]="actor.profile_path || false"></app-movie-poster>
-                            </div>
-                            <div class="crew-details">
-                                <label class="name">{{actor.name}}</label>
-                                <label class="job">as {{actor.role}}</label>
+                    </section>
+                    <section>
+                        <h3>Written By</h3>
+                        <div class="credit-cont">
+                            <div *ngFor="let writer of credit.writers" class="crew-card">
+                                <div class="crew-poster">
+                                    <app-movie-poster [posterURL]="writer.profile_path || false"></app-movie-poster>
+                                </div>
+                                <div class="crew-details">
+                                    <label class="name">{{writer.name}}</label>
+                                    <label class="job">({{writer.job}})</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                    <section>
+                        <h3>Cast</h3>
+                        <div class="credit-cont">
+                            <div *ngFor="let actor of credit.cast" class="crew-card">
+                                <div class="crew-poster">
+                                    <app-movie-poster [posterURL]="actor.profile_path || false"></app-movie-poster>
+                                </div>
+                                <div class="crew-details">
+                                    <label class="name">{{actor.name}}</label>
+                                    <label class="job">as {{actor.role}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </mat-expansion-panel>
+            <div class="flex-12 genres">
+                <span class="genre" *ngFor="let genre of movie.genres; let i = index">{{genre}} {{i < movie.genres.length-1 ? '| ' : ''}}</span>
             </div>
-        </mat-expansion-panel>
-        <div class="flex-12 genres">
-            <span class="genre" *ngFor="let genre of movie.genres; let i = index">{{genre}} {{i < movie.genres.length-1 ? '| ' : ''}}</span>
-        </div>
-    </main>
-    <footer>
-        <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(list.type)}">
+        </main>
+        <footer>
+            <button *ngFor="let list of listsConfig" (click)="toggleUserList(list.type)" [attr.aria-label]="'add to ' + list.title" title="{{list.title}}" class="user-list {{list.type}}" [ngClass]="{'active': isActive(list.type)}">
             <span class="top-border"></span>
             <mat-icon>{{list.icon}}</mat-icon>
         </button>
-    </footer>
+        </footer>
+    </ng-container>
 </div>

@@ -75,12 +75,16 @@ export class HomeComponent implements OnInit {
       width: '600px'
     });
 
+    const dialogListSub =
     dialogRef.componentInstance.updateList.subscribe(({movieID, list}) => {
       this.updateMovieList({movieID, list});
     });
 
+    const dialogCloseSub =
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      dialogListSub.unsubscribe();
+      dialogCloseSub.unsubscribe();
     });
   }
 }

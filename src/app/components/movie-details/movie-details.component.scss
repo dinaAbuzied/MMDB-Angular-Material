@@ -4,6 +4,7 @@
     padding: 30px 15px 0;
     color: var(--primary-color);
     overflow: hidden;
+    min-height: 398px;
 }
 
 button[mat-dialog-close] {
@@ -11,6 +12,18 @@ button[mat-dialog-close] {
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .2;
+}
+
+.mat-spinner {
+     ::ng-deep {
+        circle {
+            stroke: var(--color4);
+        }
+    }
+}
+
+.movie-details-loading {
+    @include centerer();
 }
 
 .movie-details {
@@ -81,7 +94,7 @@ footer {
     width: calc(100% + 30px);
     margin-left: -15px;
     display: flex;
-    height: 52px;
+    height: 54px;
 }
 
 .user-list {
@@ -132,9 +145,21 @@ footer {
     padding: 5px 8px;
     @include font-setting(0.875em, var(--primary-color), bold, false, left);
     white-space: inherit;
+    position: relative;
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        background-color: var(--color3) !important;
+    }
+    .mat-spinner {
+        @include abs-position(false, 5px);
+        background-color: var(--color3);
+        z-index: 9;
+    }
      ::ng-deep {
         .mat-expansion-indicator::after {
             margin-top: -6px;
+            color: var(--primary-color);
         }
     }
 }
