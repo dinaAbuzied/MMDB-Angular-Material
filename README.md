@@ -10,9 +10,9 @@ This project is a demo for web app you can use to search for movies, get movie d
 * Run `npm install` to install node modules.
 * Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-## Frameworks Used
-* Angular 8
-* Angular Material
+## Technologies Used
+* [Angular](https://angular.io/) v8
+* [Angular Material](https://material.angular.io/)
 
 > This project uses [InMemoryWebAPI](https://github.com/angular/in-memory-web-api) to simulate live api.
 
